@@ -600,10 +600,13 @@ async function loadData(){
   if(dirty&&localStorage.getItem('teas_data')){
     loadLocal();
     if(getToken()){showToast('Modifications locales non synchronisées — nouvel essai…');schedulePush();}
-  }else if(Array.isArray(remote)){
+  }else if(Array.isArray(remote)&&remote.length){
     TEAS=remote;saveLocal();
   }else{
+    /* thes.json absent ou vide : on garde les données locales (migration)
+       et on les pousse si un token est présent */
     loadLocal();
+    if(TEAS.length&&getToken()){showToast('Migration : envoi de la collection vers GitHub…');schedulePush();}
   }
 }
 
