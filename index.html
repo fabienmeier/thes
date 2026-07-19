@@ -3,113 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ma collection de thés — carnet de dégustation">
+<meta name="theme-color" content="#f5f0e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171412" media="(prefers-color-scheme: dark)">
 <title>Ma Collection de Thés</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1611'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23c4955a' font-family='serif'%3E茶%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.dataset.theme=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');</script>
 <style>
 :root{
   --ink:#1a1611;--ink-light:#3d3730;--sand:#f5f0e8;--sand-dark:#e8e0d0;
+  --card:#ffffff;--card-hover:#faf7f2;--panel:#f9f5ef;
   --tea-green:#5a7a4a;--tea-green-light:#7a9a6a;--oolong:#c4955a;--oolong-light:#d4a96e;
   --puerh:#7a4a3a;--accent:#c4955a;--wish:#7a5a9a;
+  --header-bg:#1a1611;--header-fg:#f5f0e8;
   --border:rgba(26,22,17,.12);--shadow:0 2px 16px rgba(26,22,17,.08);
+  --star-empty:#d0c8bc;--danger:#c0392b;
+}
+[data-theme="dark"]{
+  --ink:#ece5d8;--ink-light:#b0a795;--sand:#171412;--sand-dark:#2a251f;
+  --card:#211d18;--card-hover:#2a251f;--panel:#26211b;
+  --header-bg:#100e0c;
+  --border:rgba(236,229,216,.14);--shadow:0 2px 16px rgba(0,0,0,.4);
+  --star-empty:#4a443c;--danger:#e05545;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--sand);color:var(--ink);min-height:100vh;font-size:14px;}
-header{background:var(--ink);color:var(--sand);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--accent);}
+body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--sand);color:var(--ink);min-height:100vh;font-size:14px;transition:background .25s,color .25s;}
+header{background:var(--header-bg);color:var(--header-fg);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--accent);flex-wrap:wrap;gap:8px;}
 .header-title{display:flex;align-items:baseline;gap:10px;}
-.header-title h1{font-family:'Shippori Mincho',serif;font-size:1.35rem;font-weight:600;letter-spacing:.04em;color:var(--sand);}
+.header-title h1{font-family:'Shippori Mincho',serif;font-size:1.35rem;font-weight:600;letter-spacing:.04em;color:var(--header-fg);}
 .header-title .kanji{font-family:'Shippori Mincho',serif;font-size:.9rem;color:var(--accent);}
 .header-actions{display:flex;gap:6px;align-items:center;}
 .btn{padding:6px 12px;border:none;border-radius:2px;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;font-weight:500;transition:all .2s;letter-spacing:.02em;}
-.btn-outline{background:transparent;border:1px solid rgba(245,240,232,.35);color:var(--sand);}
+.btn-outline{background:transparent;border:1px solid rgba(245,240,232,.35);color:var(--header-fg);}
 .btn-outline:hover{background:rgba(245,240,232,.1);border-color:var(--accent);}
-.btn-accent{background:var(--accent);color:var(--ink);font-weight:600;}
+.btn-accent{background:var(--accent);color:#1a1611;font-weight:600;}
 .btn-accent:hover{background:var(--oolong-light);}
-.btn-danger{background:#c0392b;color:#fff;}
-.btn-danger:hover{background:#a93226;}
+.btn-danger{background:var(--danger);color:#fff;}
+.btn-danger:hover{opacity:.85;}
 .btn-add{background:var(--tea-green);color:#fff;font-weight:600;}
 .btn-add:hover{background:var(--tea-green-light);}
 .btn-add.hidden{display:none;}
-#token-banner{background:linear-gradient(135deg,var(--tea-green),#3d6030);color:#fff;padding:7px 28px;display:flex;align-items:center;gap:10px;font-size:12px;}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--border);}
+#token-banner{background:linear-gradient(135deg,var(--tea-green),#3d6030);color:#fff;padding:8px 28px;display:flex;align-items:center;gap:10px;font-size:12px;flex-wrap:wrap;}
 #token-banner.hidden{display:none;}
-#token-banner input{flex:1;max-width:300px;padding:5px 9px;border:1px solid rgba(255,255,255,.4);border-radius:2px;background:rgba(255,255,255,.15);color:#fff;font-size:12px;outline:none;}
-.tabs{display:flex;background:var(--ink);padding:0 28px;gap:2px;border-bottom:1px solid rgba(196,149,90,.25);}
+#token-banner input{flex:1;max-width:300px;min-width:160px;padding:5px 9px;border:1px solid rgba(255,255,255,.4);border-radius:2px;background:rgba(255,255,255,.15);color:#fff;font-size:12px;outline:none;}
+#token-banner .token-hint{flex-basis:100%;font-size:11px;opacity:.85;}
+#token-banner .token-hint a{color:#fff;}
+.tabs{display:flex;background:var(--header-bg);padding:0 28px;gap:2px;border-bottom:1px solid rgba(196,149,90,.25);overflow-x:auto;}
 .tab-btn{padding:10px 14px;background:none;border:none;color:rgba(245,240,232,.55);font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;}
-.tab-btn:hover{color:var(--sand);}
+.tab-btn:hover{color:var(--header-fg);}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
 main{max-width:1500px;margin:0 auto;padding:20px 28px;}
 .filters-bar{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
-.filters-bar input[type="text"]{padding:6px 10px;border:1px solid var(--border);border-radius:2px;background:#fff;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;outline:none;width:180px;transition:border-color .2s;}
+.filters-bar input[type="text"]{padding:6px 10px;border:1px solid var(--border);border-radius:2px;background:var(--card);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;outline:none;width:180px;transition:border-color .2s;}
 .filters-bar input:focus{border-color:var(--tea-green);}
-.filters-bar select{padding:6px 8px;border:1px solid var(--border);border-radius:2px;background:#fff;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;color:var(--ink);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%233d3730'/%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 7px center;padding-right:22px;}
+.filters-bar select{padding:6px 8px;border:1px solid var(--border);border-radius:2px;background:var(--card);font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;color:var(--ink);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888078'/%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 7px center;padding-right:22px;}
 .count-badge{margin-left:auto;font-size:12px;color:var(--ink-light);}
-.tea-table-wrap{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);}
+.tea-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:auto;box-shadow:var(--shadow);}
+@media(min-width:701px){.tea-table-wrap{max-height:calc(100vh - 215px);}}
 table.tea-table{width:100%;border-collapse:collapse;font-size:13px;}
-table.tea-table thead tr{background:var(--ink);color:var(--sand);}
-table.tea-table thead th{padding:9px 11px;text-align:left;font-family:'Shippori Mincho',serif;font-size:11px;font-weight:500;letter-spacing:.04em;white-space:nowrap;cursor:pointer;user-select:none;}
-table.tea-table thead th:hover{color:var(--accent);}
+table.tea-table thead th{position:sticky;top:0;z-index:5;background:var(--header-bg);color:var(--header-fg);padding:9px 11px;text-align:left;font-family:'Shippori Mincho',serif;font-size:11px;font-weight:500;letter-spacing:.04em;white-space:nowrap;user-select:none;}
+table.tea-table thead th.sortable{cursor:pointer;}
+table.tea-table thead th.sortable:hover{color:var(--accent);}
 table.tea-table thead th.sorted{color:var(--accent);}
-table.tea-table tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer;}
+table.tea-table tbody tr{border-bottom:1px solid var(--border);border-left:3px solid transparent;transition:background .15s;cursor:pointer;}
 table.tea-table tbody tr:last-child{border-bottom:none;}
-table.tea-table tbody tr:hover{background:#faf7f2;}
+table.tea-table tbody tr:hover{background:var(--card-hover);}
 table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .type-badge{display:inline-block;padding:2px 6px;border-radius:1px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
 .tb-vert{background:#e8f0e0;color:#3d6028;}.tb-noir{background:#e8e4df;color:#1a1611;}
 .tb-oolong{background:#f5ead8;color:#9a6830;}.tb-blanc{background:#f0ece4;color:#8a7a6a;}
 .tb-pu-erh{background:#f0e4df;color:#7a4a3a;}.tb-matcha{background:#eaf3e0;color:#5a8040;}
 .tb-infusion{background:#f5e8ec;color:#a06070;}.tb-autre{background:#eeeee8;color:#606050;}
-.strip-vert{border-left:3px solid #5a7a4a;}.strip-noir{border-left:3px solid #1a1611;}
-.strip-oolong{border-left:3px solid #c4955a;}.strip-blanc{border-left:3px solid #c8baa8;}
-.strip-pu-erh{border-left:3px solid #7a4a3a;}.strip-matcha{border-left:3px solid #8aab6f;}
-.strip-infusion{border-left:3px solid #d4a0b0;}.strip-autre{border-left:3px solid #a0a090;}
-.strip-souhait{border-left:3px solid #7a5a9a;}
+.strip-vert{border-left-color:#5a7a4a!important;}.strip-noir{border-left-color:#6b6055!important;}
+.strip-oolong{border-left-color:#c4955a!important;}.strip-blanc{border-left-color:#c8baa8!important;}
+.strip-pu-erh{border-left-color:#7a4a3a!important;}.strip-matcha{border-left-color:#8aab6f!important;}
+.strip-infusion{border-left-color:#d4a0b0!important;}.strip-autre{border-left-color:#a0a090!important;}
+.strip-souhait{border-left-color:#7a5a9a!important;}
 .stars-row{display:inline-flex;gap:1px;align-items:center;vertical-align:middle;}
-.star{font-size:12px;line-height:1;}.star.full{color:var(--accent);}.star.half{color:var(--accent);opacity:.55;}.star.empty{color:#d0c8bc;}
+.star{font-size:12px;line-height:1;}.star.full{color:var(--accent);}.star.half{color:var(--accent);opacity:.55;}.star.empty{color:var(--star-empty);}
 .note-num{font-size:11px;color:var(--ink-light);margin-left:3px;white-space:nowrap;}
 .prix-cell{white-space:nowrap;}.prix-100{font-weight:500;}.prix-kg{font-size:11px;color:var(--ink-light);}
 .badges-cell{display:flex;gap:2px;align-items:center;}
-.stock-cell{white-space:nowrap;font-size:12px;}.stock-low{color:#c0392b;font-weight:600;}.stock-ok{color:var(--tea-green);}
-.statut-btns{display:flex;gap:3px;}
-.statut-btn{padding:3px 7px;border-radius:2px;border:1px solid var(--border);background:#fff;font-size:11px;font-weight:500;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;transition:all .15s;white-space:nowrap;}
+.stock-cell{white-space:nowrap;font-size:12px;}.stock-low{color:var(--danger);font-weight:600;}.stock-ok{color:var(--tea-green);}
+.statut-btns{display:flex;gap:3px;flex-wrap:wrap;}
+.statut-btn{padding:3px 7px;border-radius:2px;border:1px solid var(--border);background:var(--card);font-size:11px;font-weight:500;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;transition:all .15s;white-space:nowrap;}
 .statut-btn.s-en-stock{background:#e8f0e0;border-color:#5a7a4a;color:#3d6028;}
 .statut-btn.s-epuise{background:#f0e4df;border-color:#c0392b;color:#c0392b;}
 .statut-btn.s-a-racheter{background:#f5ead8;border-color:#c4955a;color:#9a6830;}
 .statut-btn.s-souhait{background:#f0eaf8;border-color:#7a5a9a;color:#7a5a9a;}
-.statut-btn.inactive{background:#fff;border-color:var(--border);color:#ccc;font-weight:400;}
-.note-preview{font-size:11px;color:#6b635a;font-style:italic;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.statut-btn.inactive{background:var(--card);border-color:var(--border);color:#999080;font-weight:400;opacity:.55;}
+.note-preview{font-size:11px;color:var(--ink-light);font-style:italic;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;}
 .tags-row{display:flex;flex-wrap:wrap;gap:3px;max-width:130px;}
 .tag{background:var(--sand-dark);border:1px solid var(--border);border-radius:10px;padding:1px 7px;font-size:10px;color:var(--ink-light);display:inline-flex;align-items:center;gap:3px;}
-.tag-del{cursor:pointer;color:#ccc;font-size:11px;line-height:1;}.tag-del:hover{color:#c0392b;}
+.tag-del{cursor:pointer;color:#aaa;font-size:11px;line-height:1;}.tag-del:hover{color:var(--danger);}
 .tag-input-wrap{display:flex;gap:4px;margin-top:4px;}
-.tag-input-wrap input{flex:1;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;font-family:'Zen Kaku Gothic New',sans-serif;}
-.tag-input-wrap button{padding:5px 10px;background:var(--sand-dark);border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:12px;}
+.tag-input-wrap input{flex:1;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;font-family:'Zen Kaku Gothic New',sans-serif;background:var(--card);color:var(--ink);}
+.tag-input-wrap button{padding:5px 10px;background:var(--sand-dark);border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:12px;color:var(--ink);}
 .empty-state{text-align:center;padding:50px 20px;color:var(--ink-light);}
 .empty-state .icon{font-size:2.2rem;margin-bottom:10px;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,22,17,.6);z-index:200;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,8,6,.6);z-index:200;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--sand);border-radius:4px;width:100%;max-width:640px;max-height:93vh;overflow-y:auto;border-top:4px solid var(--accent);box-shadow:0 20px 60px rgba(26,22,17,.3);}
+.modal{background:var(--sand);border-radius:4px;width:100%;max-width:640px;max-height:93vh;overflow-y:auto;border-top:4px solid var(--accent);box-shadow:0 20px 60px rgba(0,0,0,.35);}
 .modal-header{display:flex;align-items:center;justify-content:space-between;padding:15px 20px 12px;border-bottom:1px solid var(--border);}
 .modal-header h2{font-family:'Shippori Mincho',serif;font-size:1rem;font-weight:600;}
 .modal-close{background:none;border:none;font-size:17px;cursor:pointer;color:var(--ink-light);padding:3px;line-height:1;}
 .modal-close:hover{color:var(--ink);}
 .modal-body{padding:16px 20px;}
 .modal-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:7px;justify-content:flex-end;}
-.modal-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin:-16px -20px 16px;}
-.modal-tab{padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;font-weight:500;color:var(--ink-light);transition:all .2s;}
+.modal-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin:-16px -20px 16px;overflow-x:auto;}
+.modal-tab{padding:10px 16px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;font-weight:500;color:var(--ink-light);transition:all .2s;white-space:nowrap;}
 .modal-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
 .form-group{margin-bottom:12px;}
 .form-group label{display:block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);margin-bottom:4px;}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:2px;background:#fff;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:border-color .2s;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:2px;background:var(--card);font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:border-color .2s;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--tea-green);}
 .form-group textarea{resize:vertical;min-height:55px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
 .origine-wrap{display:flex;}
 .origine-wrap input{flex:1;border-right:none;border-radius:2px 0 0 2px;}
-.origine-wrap select{width:auto;border-radius:0 2px 2px 0;padding-right:18px;font-size:11px;min-width:90px;border-left:1px solid var(--border);}
+.origine-wrap select{width:auto;border-radius:0 2px 2px 0;padding-right:18px;font-size:11px;min-width:90px;border-left:1px solid var(--border);background:var(--card);color:var(--ink);border:1px solid var(--border);}
 .prix-preview{font-size:11px;color:var(--ink-light);margin-top:3px;font-style:italic;}
 .toggle-group{display:flex;gap:6px;margin-top:4px;}
-.toggle-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:2px;background:#fff;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;color:var(--ink-light);transition:all .15s;user-select:none;}
+.toggle-btn{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border);border-radius:2px;background:var(--card);cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;color:var(--ink-light);transition:all .15s;user-select:none;}
 .toggle-btn:hover{border-color:var(--tea-green);color:var(--tea-green);}
 .toggle-btn.active-bio{background:#e8f0e0;border-color:var(--tea-green);color:#3d6028;font-weight:600;}
 .toggle-btn.active-sauvage{background:#f0e8d8;border-color:#8a6030;color:#8a6030;font-weight:600;}
@@ -117,60 +137,93 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .note-input-row{display:flex;align-items:center;gap:7px;}
 .note-input-row input[type="number"]{width:60px;text-align:center;font-size:14px;font-weight:600;padding:4px;}
 .stars-interactive{display:flex;gap:2px;flex-wrap:wrap;}
-.si{cursor:pointer;transition:color .12s,transform .1s;color:#d0c8bc;font-size:20px;line-height:1;user-select:none;}
+.si{cursor:pointer;transition:color .12s,transform .1s;color:var(--star-empty);font-size:20px;line-height:1;user-select:none;}
 .si:hover,.si.active{color:var(--accent);}.si:hover{transform:scale(1.2);}
 .si-half{font-size:14px;opacity:.8;}
 .note-label{font-size:11px;color:var(--ink-light);font-style:italic;}
-.infusion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f9f5ef;border-radius:3px;padding:10px;}
+.infusion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:var(--panel);border-radius:3px;padding:10px;}
 .infusion-param label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);display:block;margin-bottom:3px;}
-.infusion-param input{width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:13px;font-family:'Zen Kaku Gothic New',sans-serif;}
+.infusion-param input{width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:13px;font-family:'Zen Kaku Gothic New',sans-serif;background:var(--card);color:var(--ink);}
 .degustation-list{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
-.deg-item{background:#fff;border:1px solid var(--border);border-radius:3px;padding:10px;font-size:12px;}
-.deg-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.deg-item{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:10px;font-size:12px;}
+.deg-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:6px;}
 .deg-date{font-size:11px;color:var(--ink-light);}
 .deg-params{font-size:11px;color:var(--ink-light);margin-bottom:3px;}
-.deg-commentaire{font-style:italic;color:#6b635a;}
+.deg-commentaire{font-style:italic;color:var(--ink-light);}
+.deg-avg{background:var(--panel);border:1px dashed var(--border);border-radius:3px;padding:8px 10px;font-size:12px;display:flex;align-items:center;gap:8px;justify-content:space-between;margin-top:8px;}
 .btn-deg-add{background:var(--tea-green);color:#fff;font-size:12px;padding:5px 10px;border:none;border-radius:2px;cursor:pointer;margin-top:8px;}
-.btn-deg-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:2px;}.btn-deg-del:hover{color:#c0392b;}
+.btn-deg-del{background:none;border:none;color:#aaa;cursor:pointer;font-size:14px;padding:2px;}.btn-deg-del:hover{color:var(--danger);}
+.subform{background:var(--panel);border-radius:3px;padding:12px;}
+.subform label{font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px;}
+.subform input,.subform textarea{width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;font-family:'Zen Kaku Gothic New',sans-serif;background:var(--card);color:var(--ink);}
+.subform textarea{resize:vertical;min-height:50px;}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-bottom:24px;}
-.stat-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:14px;text-align:center;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;text-align:center;}
 .stat-value{font-family:'Shippori Mincho',serif;font-size:1.8rem;font-weight:700;color:var(--ink);line-height:1;margin-bottom:4px;}
 .stat-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);}
 .stat-card.accent .stat-value{color:var(--tea-green);}.stat-card.orange .stat-value{color:var(--oolong);}
-.stat-card.red .stat-value{color:#c0392b;}.stat-card.gold .stat-value{color:#b8860b;}
-.stat-card.purple .stat-value{color:#7a5a9a;}
+.stat-card.red .stat-value{color:var(--danger);}.stat-card.gold .stat-value{color:#b8860b;}
+.stat-card.purple .stat-value{color:#8a6aaa;}
 .section-title{font-family:'Shippori Mincho',serif;font-size:.9rem;font-weight:600;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
 .bar-chart{margin-bottom:24px;}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.bar-label{width:90px;font-size:12px;text-align:right;flex-shrink:0;}
+.bar-label{width:110px;font-size:12px;text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .bar-track{flex:1;height:15px;background:var(--sand-dark);border-radius:2px;overflow:hidden;}
 .bar-fill{height:100%;border-radius:2px;transition:width .5s ease;}
 .bar-count{width:26px;font-size:11px;color:var(--ink-light);font-weight:500;}
+.top5-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:12px;flex:1;min-width:130px;text-align:center;}
 .fournisseur-table{width:100%;border-collapse:collapse;font-size:13px;}
 .fournisseur-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);padding:6px 9px;border-bottom:2px solid var(--border);}
 .fournisseur-table td{padding:8px 9px;border-bottom:1px solid var(--border);}
 .fournisseur-table a{color:var(--tea-green);text-decoration:none;font-size:11px;}.fournisseur-table a:hover{text-decoration:underline;}
-.deg-mode-overlay{display:none;position:fixed;inset:0;background:var(--ink);z-index:300;flex-direction:column;align-items:center;justify-content:center;padding:40px;}
+.deg-mode-overlay{display:none;position:fixed;inset:0;background:#1a1611;z-index:300;flex-direction:column;align-items:center;justify-content:center;padding:40px;overflow-y:auto;}
 .deg-mode-overlay.open{display:flex;}
-.deg-mode-title{font-family:'Shippori Mincho',serif;font-size:2.2rem;font-weight:600;color:var(--sand);margin-bottom:6px;}
+.deg-mode-title{font-family:'Shippori Mincho',serif;font-size:2.2rem;font-weight:600;color:#f5f0e8;margin-bottom:6px;}
 .deg-mode-type{color:var(--accent);font-size:.95rem;margin-bottom:28px;}
-.deg-mode-params{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:480px;margin-bottom:28px;}
+.deg-mode-params{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:480px;margin:0 auto 28px;}
 .deg-mode-param{background:rgba(245,240,232,.08);border-radius:4px;padding:14px;text-align:center;}
 .deg-mode-param label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:8px;}
-.deg-mode-param input{background:transparent;border:none;border-bottom:1px solid rgba(245,240,232,.3);color:var(--sand);font-size:1.2rem;font-weight:600;text-align:center;width:100%;font-family:'Zen Kaku Gothic New',sans-serif;outline:none;padding:4px 0;}
+.deg-mode-param input{background:transparent;border:none;border-bottom:1px solid rgba(245,240,232,.3);color:#f5f0e8;font-size:1.2rem;font-weight:600;text-align:center;width:100%;font-family:'Zen Kaku Gothic New',sans-serif;outline:none;padding:4px 0;}
 .deg-mode-note{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px;}
 .deg-mode-note .si{font-size:26px;}
-.deg-mode-comment{width:100%;max-width:480px;background:rgba(245,240,232,.08);border:none;border-bottom:1px solid rgba(245,240,232,.3);color:var(--sand);font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;padding:8px;outline:none;border-radius:0;margin-bottom:20px;}
+.deg-mode-comment{width:100%;max-width:480px;background:rgba(245,240,232,.08);border:none;border-bottom:1px solid rgba(245,240,232,.3);color:#f5f0e8;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;padding:8px;outline:none;border-radius:0;margin-bottom:20px;}
 .deg-mode-comment::placeholder{color:rgba(245,240,232,.4);}
-.csv-area{width:100%;height:140px;font-family:monospace;font-size:11px;padding:7px;border:1px solid var(--border);border-radius:2px;resize:vertical;}
-.toast{position:fixed;bottom:20px;right:20px;background:var(--ink);color:var(--sand);padding:9px 16px;border-radius:2px;font-size:12px;z-index:999;border-left:4px solid var(--accent);opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;}
+.csv-area{width:100%;height:160px;font-family:monospace;font-size:11px;padding:7px;border:1px solid var(--border);border-radius:2px;resize:vertical;background:var(--card);color:var(--ink);}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--header-bg);color:var(--header-fg);padding:9px 16px;border-radius:2px;font-size:12px;z-index:999;border-left:4px solid var(--accent);opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:calc(100vw - 40px);}
 .toast.show{opacity:1;transform:translateY(0);}
+.toast.error{border-left-color:var(--danger);}
 #saving-indicator{font-size:11px;color:rgba(245,240,232,.6);display:none;align-items:center;gap:5px;}
 #saving-indicator.visible{display:flex;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .spinner{width:10px;height:10px;border:2px solid rgba(245,240,232,.3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
 .kbd{font-family:monospace;background:rgba(245,240,232,.15);border:1px solid rgba(245,240,232,.25);border-radius:3px;padding:1px 5px;font-size:10px;}
-@media(max-width:600px){header{padding:12px 14px;}main{padding:14px;}.tabs{padding:0 14px;}.form-row,.form-row-3{grid-template-columns:1fr;}}
+/* ===== Mobile : vue cartes ===== */
+@media(max-width:700px){
+  header{padding:12px 14px;}
+  main{padding:14px;}
+  .tabs{padding:0 14px;}
+  #token-banner{padding:8px 14px;}
+  .form-row,.form-row-3{grid-template-columns:1fr;}
+  .filters-bar input[type="text"]{width:100%;}
+  .filters-bar input,.filters-bar select,.form-group input,.form-group select,.form-group textarea,.subform input,.subform textarea,.tag-input-wrap input{font-size:16px;}
+  .statut-btn{padding:7px 11px;font-size:13px;}
+  .btn{padding:9px 14px;}
+  .count-badge{margin-left:0;flex-basis:100%;}
+  .tea-table-wrap{background:transparent;border:none;box-shadow:none;overflow:visible;}
+  table.tea-table,table.tea-table tbody,table.tea-table tr,table.tea-table td{display:block;width:100%;}
+  table.tea-table thead{display:none;}
+  table.tea-table tbody tr{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--border);border-radius:6px;margin-bottom:10px;padding:6px 0;box-shadow:var(--shadow);}
+  table.tea-table td{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:7px 14px;}
+  table.tea-table td::before{content:attr(data-label);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);flex-shrink:0;}
+  table.tea-table td.m-title{display:block;font-size:15px;padding-bottom:2px;}
+  table.tea-table td.m-title::before{content:none;}
+  table.tea-table td.m-empty{display:none;}
+  .note-preview{max-width:60vw;}
+  .tags-row{max-width:none;justify-content:flex-end;}
+  .deg-mode-params{grid-template-columns:1fr;gap:10px;}
+  .deg-mode-overlay{padding:20px;}
+  .deg-mode-title{font-size:1.6rem;}
+}
 </style>
 </head>
 <body>
@@ -182,18 +235,20 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   </div>
   <div class="header-actions">
     <div id="saving-indicator"><div class="spinner"></div> Sauvegarde…</div>
-    <button class="btn btn-outline" onclick="openExportModal()">↓ CSV</button>
-    <button class="btn btn-outline" onclick="openImportModal()">↑ CSV</button>
-    <button class="btn btn-outline" onclick="toggleTokenBanner()">🔑</button>
+    <button class="btn btn-outline" onclick="openExportModal()" aria-label="Exporter">↓ Export</button>
+    <button class="btn btn-outline" onclick="openImportModal()" aria-label="Importer">↑ Import</button>
+    <button class="btn btn-outline" id="btn-theme" onclick="toggleTheme()" aria-label="Changer de thème">🌙</button>
+    <button class="btn btn-outline" onclick="toggleTokenBanner()" aria-label="Token GitHub">🔑</button>
   </div>
 </header>
 
 <div id="token-banner" class="hidden">
   <span>Token GitHub :</span>
-  <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" />
+  <input type="password" id="token-input" placeholder="github_pat_… ou ghp_…" aria-label="Token GitHub" />
   <button class="btn btn-accent" onclick="saveToken()">Enregistrer</button>
-  <button class="btn btn-outline" style="color:var(--sand)" onclick="clearToken()">Effacer</button>
+  <button class="btn btn-outline" onclick="clearToken()">Effacer</button>
   <span id="token-status"></span>
+  <span class="token-hint">Conseil : créez un <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limité au seul dépôt <strong>thes</strong>, permission « Contents : Read and write ». Il n'aura accès à rien d'autre.</span>
 </div>
 
 <nav class="tabs">
@@ -206,23 +261,23 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 <main>
   <div id="view-collection">
     <div class="filters-bar">
-      <input type="text" id="search" placeholder="Rechercher…" oninput="renderCollection()" />
-      <select id="filter-type" onchange="renderCollection()">
+      <input type="text" id="search" placeholder="Rechercher…" oninput="renderCollection()" aria-label="Rechercher" />
+      <select id="filter-type" onchange="renderCollection()" aria-label="Filtrer par type">
         <option value="">Tous types</option>
         <option value="vert">Vert</option><option value="noir">Noir</option>
         <option value="oolong">Oolong</option><option value="blanc">Blanc</option>
         <option value="pu-erh">Pu-erh</option><option value="matcha">Matcha</option>
         <option value="infusion">Infusion</option><option value="autre">Autre</option>
       </select>
-      <select id="filter-statut" onchange="renderCollection()">
+      <select id="filter-statut" onchange="renderCollection()" aria-label="Filtrer par statut">
         <option value="">Tous statuts</option>
         <option value="en-stock">En stock</option>
         <option value="epuise">Épuisé</option>
         <option value="a-racheter">À racheter</option>
       </select>
-      <select id="filter-origine" onchange="renderCollection()"><option value="">Toutes origines</option></select>
-      <select id="filter-fournisseur" onchange="renderCollection()"><option value="">Tous fournisseurs</option></select>
-      <select id="filter-bio" onchange="renderCollection()">
+      <select id="filter-origine" onchange="renderCollection()" aria-label="Filtrer par origine"><option value="">Toutes origines</option></select>
+      <select id="filter-fournisseur" onchange="renderCollection()" aria-label="Filtrer par fournisseur"><option value="">Tous fournisseurs</option></select>
+      <select id="filter-bio" onchange="renderCollection()" aria-label="Filtrer bio ou sauvage">
         <option value="">Tous</option>
         <option value="bio">🌿 Bio</option>
         <option value="sauvage">🌲 Sauvage</option>
@@ -233,14 +288,14 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
     <div class="tea-table-wrap">
       <table class="tea-table">
         <thead><tr>
-          <th onclick="sortBy('nom')" id="th-nom">Nom ↕</th>
-          <th onclick="sortBy('type')" id="th-type">Type ↕</th>
+          <th class="sortable" onclick="sortBy('nom')" id="th-nom">Nom ↕</th>
+          <th class="sortable" onclick="sortBy('type')" id="th-type">Type ↕</th>
           <th>🌿</th>
           <th>Statut</th>
-          <th onclick="sortBy('stock')" id="th-stock">Stock ↕</th>
-          <th onclick="sortBy('note')" id="th-note">Note ↕</th>
-          <th onclick="sortBy('prix')" id="th-prix">Prix ↕</th>
-          <th onclick="sortBy('origine')" id="th-origine">Origine ↕</th>
+          <th class="sortable" onclick="sortBy('stock')" id="th-stock">Stock ↕</th>
+          <th class="sortable" onclick="sortBy('note')" id="th-note">Note ↕</th>
+          <th class="sortable" onclick="sortBy('prix')" id="th-prix">Prix ↕</th>
+          <th class="sortable" onclick="sortBy('origine')" id="th-origine">Origine ↕</th>
           <th>Fournisseur</th>
           <th>Tags</th>
           <th>Commentaire</th>
@@ -296,7 +351,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   <div class="modal">
     <div class="modal-header">
       <h2 id="modal-title">Nouveau thé</h2>
-      <button class="modal-close" onclick="closeModal('modal-tea')">✕</button>
+      <button class="modal-close" onclick="closeModal('modal-tea')" aria-label="Fermer">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-tabs">
@@ -322,7 +377,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
           <label>Origine</label>
           <div class="origine-wrap">
             <input type="text" id="f-origine" placeholder="Ex: Uji, Japon" />
-            <select id="f-origine-sel" onchange="applyOrigSel()">
+            <select id="f-origine-sel" onchange="applyOrigSel()" aria-label="Suggestions d'origine">
               <option value="">— Suggestions —</option>
               <optgroup label="🇯🇵 Japon"><option>Uji, Japon</option><option>Shizuoka, Japon</option><option>Kagoshima, Japon</option><option>Kyoto, Japon</option><option>Nishio, Japon</option><option>Yame, Japon</option><option>Wazuka, Japon</option></optgroup>
               <optgroup label="🇨🇳 Chine"><option>Yunnan, Chine</option><option>Fujian, Chine</option><option>Zhejiang, Chine</option><option>Anhui, Chine</option><option>Wuyi, Chine</option><option>Anxi, Chine</option><option>Yunnan Pu-erh, Chine</option></optgroup>
@@ -377,7 +432,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
           <div class="tags-row" id="tags-wrap" style="margin-bottom:6px"></div>
           <div class="tag-input-wrap">
             <input type="text" id="tag-input" placeholder="Ajouter un tag…" onkeydown="if(event.key==='Enter'){event.preventDefault();addTag();}" />
-            <button type="button" onclick="addTag()">+</button>
+            <button type="button" onclick="addTag()" aria-label="Ajouter le tag">+</button>
           </div>
         </div>
         <div class="form-group">
@@ -408,35 +463,36 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 
       <div id="mpanel-degustations" style="display:none">
         <div id="deg-list" class="degustation-list"></div>
+        <div id="deg-avg" class="deg-avg" style="display:none"></div>
         <button class="btn-deg-add" onclick="openNewDeg()">+ Nouvelle dégustation</button>
-        <div id="new-deg-form" style="display:none;margin-top:12px;background:#f9f5ef;border-radius:3px;padding:12px;">
+        <div id="new-deg-form" class="subform" style="display:none;margin-top:12px;">
           <div class="form-row-3" style="margin-bottom:8px;">
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Date</label><input type="date" id="deg-date" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Temp. °C</label><input type="number" id="deg-temp" placeholder="80" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Durée (s)</label><input type="number" id="deg-duree" placeholder="120" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
+            <div><label>Date</label><input type="date" id="deg-date" /></div>
+            <div><label>Temp. °C</label><input type="number" id="deg-temp" placeholder="80" /></div>
+            <div><label>Durée (s)</label><input type="number" id="deg-duree" placeholder="120" /></div>
           </div>
-          <div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Note /20</label><input type="number" id="deg-note" min="0" max="20" step="0.5" placeholder="—" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
-          <div style="margin-bottom:8px;"><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Commentaire</label><textarea id="deg-comment" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;resize:vertical;min-height:50px;font-family:'Zen Kaku Gothic New',sans-serif;" placeholder="Arômes, ressenti…"></textarea></div>
+          <div style="margin-bottom:8px;"><label>Note /20</label><input type="number" id="deg-note" min="0" max="20" step="0.5" placeholder="—" /></div>
+          <div style="margin-bottom:8px;"><label>Commentaire</label><textarea id="deg-comment" placeholder="Arômes, ressenti…"></textarea></div>
           <div style="display:flex;gap:6px;">
             <button class="btn btn-accent" style="font-size:12px;" onclick="saveDeg()">Enregistrer</button>
-            <button class="btn" style="font-size:12px;background:transparent;color:var(--ink);border:1px solid var(--border);" onclick="cancelDeg()">Annuler</button>
+            <button class="btn btn-ghost" style="font-size:12px;" onclick="cancelDeg()">Annuler</button>
           </div>
         </div>
-        <button class="btn" style="margin-top:10px;background:rgba(90,122,74,.12);color:var(--tea-green);border:none;font-size:12px;" onclick="openDegMode()">☕ Mode dégustation plein écran</button>
+        <button class="btn" style="margin-top:10px;background:rgba(90,122,74,.15);color:var(--tea-green);border:none;font-size:12px;" onclick="openDegMode()">☕ Mode dégustation plein écran</button>
       </div>
 
       <div id="mpanel-historique" style="display:none">
         <p style="font-size:12px;color:var(--ink-light);margin-bottom:12px">Historique des achats.</p>
         <div id="historique-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;"></div>
-        <div style="background:#f9f5ef;border-radius:3px;padding:12px;">
+        <div class="subform">
           <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);margin-bottom:8px;">+ Ajouter un achat</p>
           <div class="form-row" style="margin-bottom:8px;">
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Date</label><input type="date" id="hist-date" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Prix /100g (€)</label><input type="number" id="hist-prix" placeholder="0.00" min="0" step="0.01" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
+            <div><label>Date</label><input type="date" id="hist-date" /></div>
+            <div><label>Prix /100g (€)</label><input type="number" id="hist-prix" placeholder="0.00" min="0" step="0.01" /></div>
           </div>
           <div class="form-row" style="margin-bottom:8px;">
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Quantité (g)</label><input type="number" id="hist-qte" placeholder="100" min="0" step="10" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
-            <div><label style="font-size:10px;color:var(--ink-light);text-transform:uppercase;letter-spacing:.06em">Fournisseur</label><input type="text" id="hist-fourn" list="fournisseurs-list" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:12px;" /></div>
+            <div><label>Quantité (g)</label><input type="number" id="hist-qte" placeholder="100" min="0" step="10" /></div>
+            <div><label>Fournisseur</label><input type="text" id="hist-fourn" list="fournisseurs-list" /></div>
           </div>
           <button class="btn btn-accent" style="font-size:12px;" onclick="saveHistorique()">Ajouter</button>
         </div>
@@ -444,7 +500,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
     </div>
     <div class="modal-footer">
       <button class="btn btn-danger" id="btn-delete-tea" onclick="deleteTea()" style="display:none;margin-right:auto">Supprimer</button>
-      <button class="btn" style="background:transparent;color:var(--ink);border:1px solid var(--border);" onclick="closeModal('modal-tea')">Annuler <span class="kbd" style="color:var(--ink-light)">Esc</span></button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-tea')">Annuler <span class="kbd" style="color:var(--ink-light)">Esc</span></button>
       <button class="btn btn-accent" onclick="saveTea()">Enregistrer</button>
     </div>
   </div>
@@ -463,8 +519,8 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
     </div>
     <div class="deg-mode-note">
       <div style="color:rgba(245,240,232,.6);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Votre note</div>
-      <div class="stars-interactive" id="dm-stars"></div>
-      <div style="color:var(--sand);font-size:1.3rem;font-family:'Shippori Mincho',serif;" id="dm-note-val">—</div>
+      <div class="stars-interactive" id="dm-stars" style="justify-content:center"></div>
+      <div style="color:#f5f0e8;font-size:1.3rem;font-family:'Shippori Mincho',serif;" id="dm-note-val">—</div>
     </div>
     <textarea class="deg-mode-comment" id="dm-comment" rows="2" placeholder="Vos impressions…"></textarea>
     <div style="display:flex;gap:12px;justify-content:center;">
@@ -477,11 +533,18 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 <!-- MODAL EXPORT -->
 <div class="modal-overlay" id="modal-export">
   <div class="modal">
-    <div class="modal-header"><h2>Exporter CSV</h2><button class="modal-close" onclick="closeModal('modal-export')">✕</button></div>
-    <div class="modal-body"><textarea class="csv-area" id="csv-output" readonly></textarea></div>
+    <div class="modal-header"><h2>Exporter</h2><button class="modal-close" onclick="closeModal('modal-export')" aria-label="Fermer">✕</button></div>
+    <div class="modal-body">
+      <div style="display:flex;gap:6px;margin-bottom:8px;">
+        <button class="btn btn-accent" id="exp-btn-json" onclick="setExportMode('json')">JSON (complet)</button>
+        <button class="btn btn-ghost" id="exp-btn-csv" onclick="setExportMode('csv')">CSV (simplifié)</button>
+      </div>
+      <textarea class="csv-area" id="csv-output" readonly></textarea>
+      <p style="font-size:11px;margin-top:6px;color:var(--ink-light)">Le JSON contient <strong>tout</strong> (tags, infusions, dégustations, historique) — recommandé pour les sauvegardes. Le CSV ne contient que les champs principaux.</p>
+    </div>
     <div class="modal-footer">
-      <button class="btn" style="background:transparent;color:var(--ink);border:1px solid var(--border);" onclick="closeModal('modal-export')">Fermer</button>
-      <button class="btn btn-accent" onclick="downloadCSV()">↓ Télécharger</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-export')">Fermer</button>
+      <button class="btn btn-accent" onclick="downloadExport()">↓ Télécharger</button>
     </div>
   </div>
 </div>
@@ -489,15 +552,15 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 <!-- MODAL IMPORT -->
 <div class="modal-overlay" id="modal-import">
   <div class="modal">
-    <div class="modal-header"><h2>Importer CSV</h2><button class="modal-close" onclick="closeModal('modal-import')">✕</button></div>
+    <div class="modal-header"><h2>Importer</h2><button class="modal-close" onclick="closeModal('modal-import')" aria-label="Fermer">✕</button></div>
     <div class="modal-body">
-      <p style="font-size:12px;margin-bottom:9px;color:var(--ink-light)">Format : nom,type,origine,statut,fournisseur,prix,note,commentaire,bio,sauvage,stock,url,subcategory,dateAchat</p>
+      <p style="font-size:12px;margin-bottom:9px;color:var(--ink-light)">Collez un export JSON (complet) ou CSV. Format CSV : nom,type,origine,statut,fournisseur,prix,note,commentaire,bio,sauvage,stock,url,subcategory,dateAchat</p>
       <textarea class="csv-area" id="csv-input"></textarea>
-      <p style="font-size:11px;margin-top:5px;color:#c0392b">⚠ Remplace toute la collection existante.</p>
+      <p style="font-size:11px;margin-top:5px;color:var(--danger)">⚠ Remplace toute la collection existante (une confirmation sera demandée).</p>
     </div>
     <div class="modal-footer">
-      <button class="btn" style="background:transparent;color:var(--ink);border:1px solid var(--border);" onclick="closeModal('modal-import')">Annuler</button>
-      <button class="btn btn-accent" onclick="importCSV()">Importer</button>
+      <button class="btn btn-ghost" onclick="closeModal('modal-import')">Annuler</button>
+      <button class="btn btn-accent" onclick="importData()">Importer</button>
     </div>
   </div>
 </div>
@@ -505,32 +568,113 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 <div class="toast" id="toast"></div>
 
 <script>
-const GITHUB_OWNER='gargouille88',GITHUB_REPO='thes',GITHUB_FILE='index.html',GITHUB_BRANCH='main';
+/* ============ CONFIG ============ */
+const GITHUB_OWNER='gargouille88',GITHUB_REPO='thes',GITHUB_BRANCH='main';
+const DATA_FILE='thes.json';
+const STOCK_SEUIL=20;
+
 let TEAS=[],editingId=null,sortField='nom',sortAsc=true;
 let _bio=false,_sauvage=false,_statut='en-stock',_tags=[],_degs=[],_historique=[];
 let _dmTeaId=null,_dmNote=0;
-const STOCK_SEUIL=20;
 
-const TYPE_COLORS={'vert':'#5a7a4a','noir':'#1a1611','oolong':'#c4955a','blanc':'#c8baa8','pu-erh':'#7a4a3a','matcha':'#8aab6f','infusion':'#d4a0b0','autre':'#a0a090'};
+const TYPE_COLORS={'vert':'#5a7a4a','noir':'#6b6055','oolong':'#c4955a','blanc':'#c8baa8','pu-erh':'#7a4a3a','matcha':'#8aab6f','infusion':'#d4a0b0','autre':'#a0a090'};
 const TYPE_ICONS={'vert':'🍵','noir':'🫖','oolong':'🌀','blanc':'🤍','pu-erh':'🍂','matcha':'🍃','infusion':'🌸','autre':'🫙'};
 const NOTE_LABELS=['','Imbuvable','Très mauvais','Mauvais','Décevant','Passable','Moyen','Correct','Bien','Très bien','Excellent','Sublime','Exceptionnel','Divin','Parfait','Chef-d\'œuvre','Incomparable','Transcendant','Mystique','Légendaire','Absolu 茶'];
 
-function init(){loadLocal();buildStars();buildDmStars();renderAll();updateTokenStatus();populateFilters();}
+/* ============ SÉCURITÉ : ÉCHAPPEMENT ============ */
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>(/^https?:\/\//i.test(String(u||'').trim())?esc(String(u).trim()):'');
+
+/* ============ CHARGEMENT / SAUVEGARDE LOCALE ============ */
 function loadLocal(){try{const r=localStorage.getItem('teas_data');if(r)TEAS=JSON.parse(r);}catch(e){}}
-function saveLocal(){localStorage.setItem('teas_data',JSON.stringify(TEAS));}
+function saveLocal(){try{localStorage.setItem('teas_data',JSON.stringify(TEAS));}catch(e){}}
 function getToken(){return localStorage.getItem('gh_token')||'';}
 
+async function loadData(){
+  const dirty=localStorage.getItem('teas_dirty');
+  let remote=null;
+  try{
+    const r=await fetch(DATA_FILE+'?v='+Date.now(),{cache:'no-store'});
+    if(r.ok)remote=await r.json();
+  }catch(e){}
+  if(dirty&&localStorage.getItem('teas_data')){
+    loadLocal();
+    if(getToken()){showToast('Modifications locales non synchronisées — nouvel essai…');schedulePush();}
+  }else if(Array.isArray(remote)){
+    TEAS=remote;saveLocal();
+  }else{
+    loadLocal();
+  }
+}
+
+/* ============ SYNC GITHUB (debounce + gestion conflits) ============ */
+let _pushTimer=null,_pushing=false,_dirtyAgain=false;
+const apiUrl=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
+const ghHeaders=()=>({Authorization:`Bearer ${getToken()}`,Accept:'application/vnd.github.v3+json'});
+const toB64=s=>btoa(unescape(encodeURIComponent(s)));
+
+function schedulePush(){
+  if(!getToken())return;
+  localStorage.setItem('teas_dirty','1');
+  clearTimeout(_pushTimer);
+  _pushTimer=setTimeout(doPush,1200);
+}
+async function doPush(){
+  if(_pushing){_dirtyAgain=true;return;}
+  _pushing=true;setSaving(true);
+  try{
+    await pushOnce(true);
+    localStorage.removeItem('teas_dirty');
+    showToast('Sauvegardé sur GitHub ✓');
+  }catch(e){
+    console.error(e);
+    showToast('Erreur GitHub ('+(e.message||'réseau')+') — sauvegardé en local, nouvel essai à la prochaine modification',true);
+  }finally{
+    _pushing=false;setSaving(false);
+    if(_dirtyAgain){_dirtyAgain=false;schedulePush();}
+  }
+}
+async function pushOnce(canRetry){
+  let sha;
+  const r=await fetch(apiUrl+'?ref='+GITHUB_BRANCH,{headers:ghHeaders()});
+  if(r.status===200){sha=(await r.json()).sha;}
+  else if(r.status===404){sha=undefined;}
+  else if(r.status===401||r.status===403){throw new Error('token invalide ou permissions insuffisantes');}
+  else{throw new Error('HTTP '+r.status);}
+  const body={message:'maj: collection de thés',content:toB64(JSON.stringify(TEAS,null,1)),branch:GITHUB_BRANCH};
+  if(sha)body.sha=sha;
+  const p=await fetch(apiUrl,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(p.status===409||p.status===422){
+    if(canRetry)return pushOnce(false);
+    throw new Error('conflit de version');
+  }
+  if(!p.ok)throw new Error('HTTP '+p.status);
+}
+function setSaving(v){document.getElementById('saving-indicator').classList.toggle('visible',v);}
+
+/* ============ TOKEN ============ */
 function toggleTokenBanner(){const b=document.getElementById('token-banner');b.classList.toggle('hidden');if(!b.classList.contains('hidden'))document.getElementById('token-input').value=getToken();}
-function saveToken(){const v=document.getElementById('token-input').value.trim();if(v){localStorage.setItem('gh_token',v);showToast('Token enregistré ✓');updateTokenStatus();}}
+function saveToken(){const v=document.getElementById('token-input').value.trim();if(v){localStorage.setItem('gh_token',v);showToast('Token enregistré ✓');updateTokenStatus();if(TEAS.length)schedulePush();}}
 function clearToken(){localStorage.removeItem('gh_token');document.getElementById('token-input').value='';updateTokenStatus();showToast('Token effacé');}
 function updateTokenStatus(){const t=getToken(),el=document.getElementById('token-status'),btn=document.getElementById('btn-add');if(t){el.textContent='✓ Actif';el.style.color='#90d070';btn&&btn.classList.remove('hidden');}else{el.textContent='⚠ Lecture seule';el.style.color='#f0c060';btn&&btn.classList.add('hidden');}}
 
-function switchTab(tab){['collection','racheter','souhait','stats'].forEach(t=>{document.getElementById('view-'+t).style.display=t===tab?'':'none';document.getElementById('tab-'+t).classList.toggle('active',t===tab);});if(tab==='stats')renderStats();if(tab==='racheter')renderRacheter();if(tab==='souhait')renderSouhait();}
+/* ============ THÈME ============ */
+function applyTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('theme',t);const b=document.getElementById('btn-theme');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
+function toggleTheme(){applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');}
 
+/* ============ NAVIGATION ============ */
+function switchTab(tab){['collection','racheter','souhait','stats'].forEach(t=>{document.getElementById('view-'+t).style.display=t===tab?'':'none';document.getElementById('tab-'+t).classList.toggle('active',t===tab);});if(tab==='stats')renderStats();if(tab==='racheter')renderRacheter();if(tab==='souhait')renderSouhait();}
 function switchModalTab(tab){['infos','infusion','degustations','historique'].forEach(t=>{document.getElementById('mpanel-'+t).style.display=t===tab?'':'none';document.getElementById('mtab-'+t).classList.toggle('active',t===tab);});}
 
-function sortBy(f){if(sortField===f)sortAsc=!sortAsc;else{sortField=f;sortAsc=true;}renderCollection();document.querySelectorAll('thead th').forEach(th=>th.classList.remove('sorted'));const th=document.getElementById('th-'+f);if(th)th.classList.add('sorted');}
+function sortBy(f){
+  if(sortField===f)sortAsc=!sortAsc;else{sortField=f;sortAsc=true;}
+  renderCollection();
+  document.querySelectorAll('.tea-table thead th').forEach(th=>{th.classList.remove('sorted');th.removeAttribute('aria-sort');});
+  const th=document.getElementById('th-'+f);
+  if(th){th.classList.add('sorted');th.setAttribute('aria-sort',sortAsc?'ascending':'descending');}
+}
 
+/* ============ FILTRES + TRI (valeurs vides en fin) ============ */
 function filteredTeas(){
   const q=document.getElementById('search').value.toLowerCase();
   const type=document.getElementById('filter-type').value;
@@ -538,9 +682,10 @@ function filteredTeas(){
   const origine=document.getElementById('filter-origine').value;
   const fourn=document.getElementById('filter-fournisseur').value;
   const bio=document.getElementById('filter-bio').value;
+  const numeric=['prix','note','stock'].includes(sortField);
   return TEAS.filter(t=>{
     if(t.statut==='souhait')return false;
-    if(q&&!t.nom.toLowerCase().includes(q)&&!(t.origine||'').toLowerCase().includes(q)&&!(t.fournisseur||'').toLowerCase().includes(q)&&!(t.tags||[]).join(' ').toLowerCase().includes(q))return false;
+    if(q&&!t.nom.toLowerCase().includes(q)&&!(t.origine||'').toLowerCase().includes(q)&&!(t.fournisseur||'').toLowerCase().includes(q)&&!(t.subcategory||'').toLowerCase().includes(q)&&!(t.tags||[]).join(' ').toLowerCase().includes(q))return false;
     if(type&&t.type!==type)return false;
     if(statut&&t.statut!==statut)return false;
     if(origine&&(t.origine||'')!==origine)return false;
@@ -548,7 +693,18 @@ function filteredTeas(){
     if(bio==='bio'&&!t.bio)return false;
     if(bio==='sauvage'&&!t.sauvage)return false;
     return true;
-  }).sort((a,b)=>{let va=a[sortField]||'',vb=b[sortField]||'';if(sortField==='prix'||sortField==='note'||sortField==='stock'){va=parseFloat(va)||0;vb=parseFloat(vb)||0;}if(va<vb)return sortAsc?-1:1;if(va>vb)return sortAsc?1:-1;return 0;});
+  }).sort((a,b)=>{
+    let va=a[sortField],vb=b[sortField];
+    if(numeric){
+      va=parseFloat(va);vb=parseFloat(vb);
+      const ea=isNaN(va),eb=isNaN(vb);
+      if(ea&&eb)return 0;if(ea)return 1;if(eb)return -1;
+    }else{
+      va=(va||'').toString().toLowerCase();vb=(vb||'').toString().toLowerCase();
+      if(!va&&!vb)return 0;if(!va)return 1;if(!vb)return -1;
+    }
+    if(va<vb)return sortAsc?-1:1;if(va>vb)return sortAsc?1:-1;return 0;
+  });
 }
 
 function renderAll(){renderCollection();populateFilters();}
@@ -563,36 +719,37 @@ function renderCollection(){
 }
 
 function teaRow(t){
-  const noteHtml=t.note?`${starsDisplay(t.note)}<span class="note-num">${parseFloat(t.note).toFixed(1)}/20</span>`:'<span style="color:#ccc">—</span>';
+  const noteHtml=t.note?`${starsDisplay(t.note)}<span class="note-num">${parseFloat(t.note).toFixed(1)}/20</span>`:'<span style="color:var(--star-empty)">—</span>';
   const prixHtml=t.prix?`<div class="prix-cell"><div class="prix-100">${parseFloat(t.prix).toFixed(2)} €/100g</div><div class="prix-kg">${(parseFloat(t.prix)*10).toFixed(2)} €/kg</div></div>`:'—';
-  const subcat=t.subcategory?` <em style="font-size:11px;font-weight:400;color:var(--ink-light)">${t.subcategory}</em>`:'';
-  const typeTip=`<span class="type-badge tb-${t.type}" title="${t.type}">${TYPE_ICONS[t.type]||'🫙'} ${t.type}</span>${subcat}`;
-  const badges=`<div class="badges-cell">${t.bio?'<span title="Bio" style="font-size:13px">🌿</span>':''}${t.sauvage?'<span title="Sauvage" style="font-size:13px">🌲</span>':''}</div>`;
+  const subcat=t.subcategory?` <em style="font-size:11px;font-weight:400;color:var(--ink-light)">${esc(t.subcategory)}</em>`:'';
+  const typeTip=`<span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span>${subcat}`;
+  const badges=(t.bio?'<span title="Bio" style="font-size:13px">🌿</span>':'')+(t.sauvage?'<span title="Sauvage" style="font-size:13px">🌲</span>':'');
   const st=t.statut||'en-stock';
   const statutBtns=`<div class="statut-btns" onclick="event.stopPropagation()">
-    <button class="statut-btn s-en-stock${st==='en-stock'?'':' inactive'}" onclick="setStatut('${t.id}','en-stock')" title="En stock">✓</button>
-    <button class="statut-btn s-a-racheter${st==='a-racheter'?'':' inactive'}" onclick="setStatut('${t.id}','a-racheter')" title="À racheter">↻</button>
-    <button class="statut-btn s-epuise${st==='epuise'?'':' inactive'}" onclick="setStatut('${t.id}','epuise')" title="Épuisé">✗</button>
-    <button class="statut-btn s-souhait${st==='souhait'?'':' inactive'}" onclick="setStatut('${t.id}','souhait')" title="Souhait">✨</button>
+    <button class="statut-btn s-en-stock${st==='en-stock'?'':' inactive'}" onclick="setStatut('${esc(t.id)}','en-stock')" title="En stock" aria-label="En stock">✓</button>
+    <button class="statut-btn s-a-racheter${st==='a-racheter'?'':' inactive'}" onclick="setStatut('${esc(t.id)}','a-racheter')" title="À racheter" aria-label="À racheter">↻</button>
+    <button class="statut-btn s-epuise${st==='epuise'?'':' inactive'}" onclick="setStatut('${esc(t.id)}','epuise')" title="Épuisé" aria-label="Épuisé">✗</button>
+    <button class="statut-btn s-souhait${st==='souhait'?'':' inactive'}" onclick="setStatut('${esc(t.id)}','souhait')" title="Souhait" aria-label="Souhait">✨</button>
   </div>`;
-  const stockVal=t.stock?parseFloat(t.stock):null;
-  const stock=stockVal!==null?`<div class="stock-cell ${stockVal<=STOCK_SEUIL?'stock-low':'stock-ok'}">${stockVal}g${stockVal<=STOCK_SEUIL?' ⚠':''}</div>`:'—';
-  const tags=(t.tags||[]).map(tag=>`<span class="tag">${tag}</span>`).join('');
-  const linkBtn=t.url?`<a href="${t.url}" target="_blank" onclick="event.stopPropagation()" title="Voir chez le fournisseur" style="font-size:13px;text-decoration:none">🔗</a>`:'';
-  const dlcWarn=t.infusion?.dlc&&new Date(t.infusion.dlc)<new Date()?'<span title="DLC dépassée" style="font-size:12px">⚠️</span>':'';
-  return `<tr class="strip-${t.type}" onclick="openEditModal('${t.id}')">
-    <td><strong>${t.nom}</strong> ${dlcWarn}</td>
-    <td>${typeTip}</td>
-    <td>${badges}</td>
-    <td>${statutBtns}</td>
-    <td>${stock}</td>
-    <td style="white-space:nowrap">${noteHtml}</td>
-    <td>${prixHtml}</td>
-    <td>${t.origine||'—'}</td>
-    <td style="white-space:nowrap">${t.fournisseur||'—'} ${linkBtn}</td>
-    <td><div class="tags-row">${tags}</div></td>
-    <td><span class="note-preview">${t.commentaire||''}</span></td>
-    <td onclick="event.stopPropagation()"><button style="background:none;border:none;cursor:pointer;font-size:15px;padding:2px;" onclick="openDegModeFor('${t.id}')" title="Mode dégustation">☕</button></td>
+  const stockVal=t.stock!==''&&t.stock!==undefined&&t.stock!==null?parseFloat(t.stock):null;
+  const stock=(stockVal!==null&&!isNaN(stockVal))?`<div class="stock-cell ${stockVal<=STOCK_SEUIL?'stock-low':'stock-ok'}">${stockVal}g${stockVal<=STOCK_SEUIL?' ⚠':''}</div>`:'—';
+  const tags=(t.tags||[]).map(tag=>`<span class="tag">${esc(tag)}</span>`).join('');
+  const u=safeUrl(t.url);
+  const linkBtn=u?`<a href="${u}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Voir chez le fournisseur" style="font-size:13px;text-decoration:none">🔗</a>`:'';
+  const dlcWarn=(t.infusion&&t.infusion.dlc&&new Date(t.infusion.dlc)<new Date())?'<span title="DLC dépassée" style="font-size:12px">⚠️</span>':'';
+  return `<tr class="strip-${esc(t.type)}" onclick="openEditModal('${esc(t.id)}')">
+    <td class="m-title" data-label=""><strong>${esc(t.nom)}</strong> ${dlcWarn}</td>
+    <td data-label="Type">${typeTip}</td>
+    <td data-label="Bio/Sauvage" class="${badges?'':'m-empty'}"><div class="badges-cell">${badges}</div></td>
+    <td data-label="Statut">${statutBtns}</td>
+    <td data-label="Stock" class="${stock==='—'?'m-empty':''}">${stock}</td>
+    <td data-label="Note" style="white-space:nowrap">${noteHtml}</td>
+    <td data-label="Prix" class="${prixHtml==='—'?'m-empty':''}">${prixHtml}</td>
+    <td data-label="Origine" class="${t.origine?'':'m-empty'}">${esc(t.origine)||'—'}</td>
+    <td data-label="Fournisseur" class="${(t.fournisseur||u)?'':'m-empty'}" style="white-space:nowrap">${esc(t.fournisseur)||'—'} ${linkBtn}</td>
+    <td data-label="Tags" class="${tags?'':'m-empty'}"><div class="tags-row">${tags}</div></td>
+    <td data-label="Commentaire" class="${t.commentaire?'':'m-empty'}"><span class="note-preview">${esc(t.commentaire)}</span></td>
+    <td data-label="Dégustation" onclick="event.stopPropagation()"><button style="background:none;border:none;cursor:pointer;font-size:15px;padding:2px;" onclick="openDegModeFor('${esc(t.id)}')" title="Mode dégustation" aria-label="Mode dégustation">☕</button></td>
   </tr>`;
 }
 
@@ -602,15 +759,15 @@ function renderRacheter(){
   const tbody=document.getElementById('racheter-tbody'),empty=document.getElementById('racheter-empty');
   if(!teas.length){tbody.innerHTML='';empty.style.display='';return;}
   empty.style.display='none';
-  tbody.innerHTML=teas.map(t=>`<tr class="strip-${t.type}" onclick="openEditModal('${t.id}')">
-    <td><strong>${t.nom}</strong></td>
-    <td><span class="type-badge tb-${t.type}">${TYPE_ICONS[t.type]||'🫙'} ${t.type}</span></td>
-    <td>${t.note?starsDisplay(t.note)+'<span class="note-num">'+parseFloat(t.note).toFixed(1)+'/20</span>':'—'}</td>
-    <td>${t.prix?parseFloat(t.prix).toFixed(2)+' €/100g':'—'}</td>
-    <td>${t.origine||'—'}</td>
-    <td>${t.fournisseur||'—'}</td>
-    <td>${t.url?`<a href="${t.url}" target="_blank" onclick="event.stopPropagation()" style="color:var(--tea-green);text-decoration:none;font-size:13px;">🔗 Acheter</a>`:'—'}</td>
-  </tr>`).join('');
+  tbody.innerHTML=teas.map(t=>{const u=safeUrl(t.url);return`<tr class="strip-${esc(t.type)}" onclick="openEditModal('${esc(t.id)}')">
+    <td class="m-title" data-label=""><strong>${esc(t.nom)}</strong></td>
+    <td data-label="Type"><span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span></td>
+    <td data-label="Note" class="${t.note?'':'m-empty'}">${t.note?starsDisplay(t.note)+'<span class="note-num">'+parseFloat(t.note).toFixed(1)+'/20</span>':'—'}</td>
+    <td data-label="Prix" class="${t.prix?'':'m-empty'}">${t.prix?parseFloat(t.prix).toFixed(2)+' €/100g':'—'}</td>
+    <td data-label="Origine" class="${t.origine?'':'m-empty'}">${esc(t.origine)||'—'}</td>
+    <td data-label="Fournisseur" class="${t.fournisseur?'':'m-empty'}">${esc(t.fournisseur)||'—'}</td>
+    <td data-label="Lien" class="${u?'':'m-empty'}">${u?`<a href="${u}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--tea-green);text-decoration:none;font-size:13px;">🔗 Acheter</a>`:'—'}</td>
+  </tr>`;}).join('');
 }
 
 function renderSouhait(){
@@ -619,25 +776,26 @@ function renderSouhait(){
   const tbody=document.getElementById('souhait-tbody'),empty=document.getElementById('souhait-empty');
   if(!teas.length){tbody.innerHTML='';empty.style.display='';return;}
   empty.style.display='none';
-  tbody.innerHTML=teas.map(t=>`<tr class="strip-souhait" onclick="openEditModal('${t.id}')">
-    <td><strong>${t.nom}</strong></td>
-    <td><span class="type-badge tb-${t.type}">${TYPE_ICONS[t.type]||'🫙'} ${t.type}</span></td>
-    <td>${t.origine||'—'}</td>
-    <td>${t.fournisseur||'—'}</td>
-    <td>${t.url?`<a href="${t.url}" target="_blank" onclick="event.stopPropagation()" style="color:var(--tea-green);text-decoration:none;font-size:13px;">🔗 Voir</a>`:'—'}</td>
-    <td><span class="note-preview">${t.commentaire||''}</span></td>
-  </tr>`).join('');
+  tbody.innerHTML=teas.map(t=>{const u=safeUrl(t.url);return`<tr class="strip-souhait" onclick="openEditModal('${esc(t.id)}')">
+    <td class="m-title" data-label=""><strong>${esc(t.nom)}</strong></td>
+    <td data-label="Type"><span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span></td>
+    <td data-label="Origine" class="${t.origine?'':'m-empty'}">${esc(t.origine)||'—'}</td>
+    <td data-label="Fournisseur" class="${t.fournisseur?'':'m-empty'}">${esc(t.fournisseur)||'—'}</td>
+    <td data-label="Lien" class="${u?'':'m-empty'}">${u?`<a href="${u}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--tea-green);text-decoration:none;font-size:13px;">🔗 Voir</a>`:'—'}</td>
+    <td data-label="Commentaire" class="${t.commentaire?'':'m-empty'}"><span class="note-preview">${esc(t.commentaire)}</span></td>
+  </tr>`;}).join('');
 }
 
 function populateFilters(){
-  const populate=(id,items,allLabel)=>{const s=document.getElementById(id);if(!s)return;const cur=s.value;s.innerHTML=`<option value="">${allLabel}</option>`+items.map(v=>`<option value="${v}">${v}</option>`).join('');s.value=cur;};
+  const populate=(id,items,allLabel)=>{const s=document.getElementById(id);if(!s)return;const cur=s.value;s.innerHTML=`<option value="">${allLabel}</option>`+items.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');s.value=cur;};
   populate('filter-origine',[...new Set(TEAS.map(t=>t.origine).filter(Boolean))].sort(),'Toutes origines');
   populate('filter-fournisseur',[...new Set(TEAS.map(t=>t.fournisseur).filter(Boolean))].sort(),'Tous fournisseurs');
   const dl=document.getElementById('fournisseurs-list');
-  if(dl)dl.innerHTML=[...new Set(TEAS.map(t=>t.fournisseur).filter(Boolean))].sort().map(f=>`<option value="${f}">`).join('');
+  if(dl)dl.innerHTML=[...new Set(TEAS.map(t=>t.fournisseur).filter(Boolean))].sort().map(f=>`<option value="${esc(f)}">`).join('');
 }
 
-function starsDisplay(note){const n=parseFloat(note),full=Math.floor(n/2),half=(n%2)>=1?1:0,empty=10-full-half;return`<span class="stars-row">${'<span class="star full">★</span>'.repeat(full)}${half?'<span class="star half">★</span>':''} ${'<span class="star empty">☆</span>'.repeat(empty)}</span>`;}
+/* ============ ÉTOILES ============ */
+function starsDisplay(note){const n=parseFloat(note),full=Math.floor(n/2),half=(n%2)>=1?1:0,empty=10-full-half;return`<span class="stars-row">${'<span class="star full">★</span>'.repeat(full)}${half?'<span class="star half">★</span>':''}${'<span class="star empty">☆</span>'.repeat(empty)}</span>`;}
 
 function buildStars(){
   const w=document.getElementById('stars-widget');w.innerHTML='';
@@ -655,6 +813,7 @@ function buildDmStars(){
 function setDmNote(v){_dmNote=v;hlDmStars(v);document.getElementById('dm-note-val').textContent=NOTE_LABELS[Math.round(v)]||v+'/20';}
 function hlDmStars(v){document.querySelectorAll('#dm-stars .si').forEach(s=>{s.style.color=parseInt(s.dataset.val)<=v?'var(--accent)':'rgba(245,240,232,.25)';});}
 
+/* ============ FORMULAIRE ============ */
 function updatePrixPrev(){const v=parseFloat(document.getElementById('f-prix').value);document.getElementById('prix-preview').textContent=(!isNaN(v)&&v>0)?`→ ${(v*10).toFixed(2)} €/kg`:'';}
 function updateStockPreview(){
   const s=parseFloat(document.getElementById('f-stock').value);
@@ -666,41 +825,52 @@ function updateStockPreview(){
 }
 function applyOrigSel(){const s=document.getElementById('f-origine-sel');if(s.value){document.getElementById('f-origine').value=s.value;s.value='';}}
 
-function renderTagsWrap(){const w=document.getElementById('tags-wrap');w.innerHTML=_tags.map((tag,i)=>`<span class="tag">${tag}<span class="tag-del" onclick="removeTag(${i})">×</span></span>`).join('');}
+function renderTagsWrap(){const w=document.getElementById('tags-wrap');w.innerHTML=_tags.map((tag,i)=>`<span class="tag">${esc(tag)}<span class="tag-del" onclick="removeTag(${i})" role="button" aria-label="Supprimer le tag">×</span></span>`).join('');}
 function addTag(){const inp=document.getElementById('tag-input');const v=inp.value.trim();if(v&&!_tags.includes(v)){_tags.push(v);renderTagsWrap();}inp.value='';}
 function removeTag(i){_tags.splice(i,1);renderTagsWrap();}
 
-function setStatut(id,statut){const t=TEAS.find(x=>x.id===id);if(!t)return;t.statut=statut;saveLocal();renderAll();if(document.getElementById('view-racheter').style.display!=='none')renderRacheter();if(document.getElementById('view-souhait').style.display!=='none')renderSouhait();pushToGitHub();}
-function setModalStatut(s){_statut=s;['en-stock','a-racheter','epuise','souhait'].forEach(v=>{const btn=document.getElementById('ms-'+v);if(btn){if(v===s)btn.classList.remove('inactive');else btn.classList.add('inactive');}});}
+function setStatut(id,statut){const t=TEAS.find(x=>x.id===id);if(!t)return;t.statut=statut;saveLocal();renderAll();if(document.getElementById('view-racheter').style.display!=='none')renderRacheter();if(document.getElementById('view-souhait').style.display!=='none')renderSouhait();schedulePush();}
+function setModalStatut(s){_statut=s;['en-stock','a-racheter','epuise','souhait'].forEach(v=>{const btn=document.getElementById('ms-'+v);if(btn)btn.classList.toggle('inactive',v!==s);});}
 function toggleBio(){_bio=!_bio;document.getElementById('toggle-bio').classList.toggle('active-bio',_bio);}
 function toggleSauvage(){_sauvage=!_sauvage;document.getElementById('toggle-sauvage').classList.toggle('active-sauvage',_sauvage);}
 
+/* ============ DÉGUSTATIONS ============ */
+function degAverage(){const notes=_degs.map(d=>parseFloat(d.note)).filter(n=>!isNaN(n));if(!notes.length)return null;return notes.reduce((s,n)=>s+n,0)/notes.length;}
 function renderDegList(){
   const el=document.getElementById('deg-list');
-  if(!_degs.length){el.innerHTML='<p style="font-size:12px;color:var(--ink-light);font-style:italic">Aucune dégustation enregistrée.</p>';return;}
-  el.innerHTML=_degs.slice().reverse().map((d,ri)=>{const i=_degs.length-1-ri;return`<div class="deg-item"><div class="deg-item-header"><span class="deg-date">📅 ${d.date||'—'}</span><span>${d.note?starsDisplay(d.note)+'<span class="note-num">'+parseFloat(d.note).toFixed(1)+'/20</span>':''}</span><button class="btn-deg-del" onclick="deleteDeg(${i})">✕</button></div>${d.temp||d.duree?`<div class="deg-params">${d.temp?'🌡 '+d.temp+'°C':''}${d.temp&&d.duree?' · ':''}${d.duree?'⏱ '+d.duree+'s':''}</div>`:''}${d.comment?`<div class="deg-commentaire">${d.comment}</div>`:''}`;}).join('');
+  if(!_degs.length){el.innerHTML='<p style="font-size:12px;color:var(--ink-light);font-style:italic">Aucune dégustation enregistrée.</p>';}
+  else{
+    el.innerHTML=_degs.slice().reverse().map((d,ri)=>{const i=_degs.length-1-ri;return`<div class="deg-item"><div class="deg-item-header"><span class="deg-date">📅 ${esc(d.date)||'—'}</span><span>${d.note?starsDisplay(d.note)+'<span class="note-num">'+parseFloat(d.note).toFixed(1)+'/20</span>':''}</span><button class="btn-deg-del" onclick="deleteDeg(${i})" aria-label="Supprimer">✕</button></div>${d.temp||d.duree?`<div class="deg-params">${d.temp?'🌡 '+esc(d.temp)+'°C':''}${d.temp&&d.duree?' · ':''}${d.duree?'⏱ '+esc(d.duree)+'s':''}</div>`:''}${d.comment?`<div class="deg-commentaire">${esc(d.comment)}</div>`:''}</div>`;}).join('');
+  }
+  const avgEl=document.getElementById('deg-avg');
+  const avg=degAverage();
+  if(avg!==null){avgEl.style.display='';avgEl.innerHTML=`<span>Moyenne des dégustations : <strong>${avg.toFixed(1)}/20</strong></span><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px;" onclick="applyDegAverage()">→ Utiliser comme note</button>`;}
+  else{avgEl.style.display='none';avgEl.innerHTML='';}
 }
+function applyDegAverage(){const avg=degAverage();if(avg===null)return;document.getElementById('f-note').value=(Math.round(avg*2)/2).toFixed(1);syncStars();showToast('Note mise à jour depuis la moyenne des dégustations');}
 function openNewDeg(){document.getElementById('new-deg-form').style.display='';document.getElementById('deg-date').value=new Date().toISOString().slice(0,10);}
 function cancelDeg(){document.getElementById('new-deg-form').style.display='none';}
 function saveDeg(){const d={date:document.getElementById('deg-date').value,temp:document.getElementById('deg-temp').value,duree:document.getElementById('deg-duree').value,note:document.getElementById('deg-note').value,comment:document.getElementById('deg-comment').value.trim()};_degs.push(d);renderDegList();cancelDeg();['deg-temp','deg-duree','deg-note','deg-comment'].forEach(id=>{document.getElementById(id).value='';});}
 function deleteDeg(i){_degs.splice(i,1);renderDegList();}
 
+/* ============ HISTORIQUE ============ */
 function renderHistoriqueList(){
   const el=document.getElementById('historique-list');
   if(!_historique.length){el.innerHTML='<p style="font-size:12px;color:var(--ink-light);font-style:italic">Aucun achat enregistré.</p>';return;}
-  el.innerHTML=_historique.slice().reverse().map((h,ri)=>{const i=_historique.length-1-ri;return`<div style="background:#fff;border:1px solid var(--border);border-radius:3px;padding:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center"><span>📅 ${h.date||'—'} · ${h.qte||'?'}g · ${h.prix||'?'}€/100g${h.fourn?' · '+h.fourn:''}</span><button class="btn-deg-del" onclick="deleteHistorique(${i})">✕</button></div>`;}).join('');
+  el.innerHTML=_historique.slice().reverse().map((h,ri)=>{const i=_historique.length-1-ri;return`<div style="background:var(--card);border:1px solid var(--border);border-radius:3px;padding:8px;font-size:12px;display:flex;justify-content:space-between;align-items:center"><span>📅 ${esc(h.date)||'—'} · ${esc(h.qte)||'?'}g · ${esc(h.prix)||'?'}€/100g${h.fourn?' · '+esc(h.fourn):''}</span><button class="btn-deg-del" onclick="deleteHistorique(${i})" aria-label="Supprimer">✕</button></div>`;}).join('');
 }
 function saveHistorique(){const h={date:document.getElementById('hist-date').value,prix:document.getElementById('hist-prix').value,qte:document.getElementById('hist-qte').value,fourn:document.getElementById('hist-fourn').value.trim()};if(!h.date&&!h.prix&&!h.qte)return;_historique.push(h);renderHistoriqueList();['hist-date','hist-prix','hist-qte','hist-fourn'].forEach(id=>{document.getElementById(id).value='';});}
 function deleteHistorique(i){_historique.splice(i,1);renderHistoriqueList();}
 
+/* ============ MODE DÉGUSTATION ============ */
 function openDegModeFor(id){
   _dmTeaId=id;_dmNote=0;
   const t=TEAS.find(x=>x.id===id);if(!t)return;
   document.getElementById('dm-nom').textContent=t.nom;
   document.getElementById('dm-type').textContent=(TYPE_ICONS[t.type]||'')+' '+t.type+(t.origine?' — '+t.origine:'');
-  document.getElementById('dm-temp').value=t.infusion?.temp||'';
-  document.getElementById('dm-duree').value=t.infusion?.duree||'';
-  document.getElementById('dm-qte').value=t.infusion?.qte||'';
+  document.getElementById('dm-temp').value=(t.infusion&&t.infusion.temp)||'';
+  document.getElementById('dm-duree').value=(t.infusion&&t.infusion.duree)||'';
+  document.getElementById('dm-qte').value=(t.infusion&&t.infusion.qte)||'';
   document.getElementById('dm-comment').value='';
   document.getElementById('dm-note-val').textContent='—';
   hlDmStars(0);
@@ -713,9 +883,10 @@ function saveDegMode(){
   if(!t.degustations)t.degustations=[];
   t.degustations.push({date:new Date().toISOString().slice(0,10),temp:document.getElementById('dm-temp').value,duree:document.getElementById('dm-duree').value,qte:document.getElementById('dm-qte').value,note:_dmNote||'',comment:document.getElementById('dm-comment').value.trim()});
   if(editingId===_dmTeaId){_degs=t.degustations;renderDegList();}
-  saveLocal();pushToGitHub();closeDegMode();showToast('Dégustation enregistrée ✓');
+  saveLocal();schedulePush();closeDegMode();showToast('Dégustation enregistrée ✓');
 }
 
+/* ============ MODAL AJOUT/ÉDITION ============ */
 function openAddModal(){
   editingId=null;document.getElementById('modal-title').textContent='Nouveau thé';
   ['nom','origine','fournisseur','commentaire','url','subcategory'].forEach(f=>{const el=document.getElementById('f-'+f);if(el)el.value='';});
@@ -730,6 +901,7 @@ function openAddModal(){
   renderTagsWrap();renderDegList();renderHistoriqueList();
   populateFilters();switchModalTab('infos');
   setRO(false);openModal('modal-tea');
+  setTimeout(()=>document.getElementById('f-nom').focus(),50);
 }
 
 function openEditModal(id){
@@ -763,7 +935,7 @@ function setRO(ro){
 }
 
 function saveTea(){
-  const nom=document.getElementById('f-nom').value.trim();if(!nom){showToast('Le nom est obligatoire.');return;}
+  const nom=document.getElementById('f-nom').value.trim();if(!nom){showToast('Le nom est obligatoire.',true);return;}
   const noteRaw=document.getElementById('f-note').value;
   const note=noteRaw!==''?Math.min(20,Math.max(0,parseFloat(noteRaw)||0)).toString():'';
   const tea={
@@ -778,11 +950,12 @@ function saveTea(){
     degustations:[..._degs],historique:[..._historique]
   };
   if(editingId){const i=TEAS.findIndex(x=>x.id===editingId);if(i>=0){const old=TEAS[i];if(old.degustations&&old.degustations.length>_degs.length)tea.degustations=old.degustations;TEAS[i]=tea;}}else TEAS.push(tea);
-  closeModal('modal-tea');saveLocal();renderAll();pushToGitHub();
+  closeModal('modal-tea');saveLocal();renderAll();schedulePush();
 }
 
-function deleteTea(){if(!editingId||!confirm('Supprimer ce thé ?'))return;TEAS=TEAS.filter(t=>t.id!==editingId);closeModal('modal-tea');saveLocal();renderAll();pushToGitHub();}
+function deleteTea(){if(!editingId||!confirm('Supprimer ce thé ?'))return;TEAS=TEAS.filter(t=>t.id!==editingId);closeModal('modal-tea');saveLocal();renderAll();schedulePush();}
 
+/* ============ STATS ============ */
 function renderStats(){
   const all=TEAS.filter(t=>t.statut!=='souhait');
   const total=all.length,enStock=all.filter(t=>t.statut==='en-stock').length;
@@ -791,6 +964,7 @@ function renderStats(){
   const valeur=all.filter(t=>t.prix&&t.stock).reduce((s,t)=>s+parseFloat(t.prix)*parseFloat(t.stock)/100,0);
   const noted=all.filter(t=>t.note);
   const avgNote=noted.length?(noted.reduce((s,t)=>s+parseFloat(t.note),0)/noted.length).toFixed(1):'—';
+  const nbDeg=all.reduce((s,t)=>s+((t.degustations||[]).length),0);
   const stockBas=all.filter(t=>t.stock&&parseFloat(t.stock)>0&&parseFloat(t.stock)<=STOCK_SEUIL).length;
   document.getElementById('stats-cards').innerHTML=`
     <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Total</div></div>
@@ -799,70 +973,113 @@ function renderStats(){
     <div class="stat-card red"><div class="stat-value">${epuises}</div><div class="stat-label">Épuisés</div></div>
     <div class="stat-card purple"><div class="stat-value">${souhaits}</div><div class="stat-label">Souhaits</div></div>
     <div class="stat-card gold"><div class="stat-value">${avgNote}</div><div class="stat-label">Note moy. /20</div></div>
+    <div class="stat-card"><div class="stat-value">${nbDeg}</div><div class="stat-label">Dégustations</div></div>
     <div class="stat-card"><div class="stat-value">${valeur.toFixed(0)}€</div><div class="stat-label">Valeur stock</div></div>
-    <div class="stat-card${stockBas?'red':''}" style="${stockBas?'border-color:#c0392b':''}""><div class="stat-value" style="${stockBas?'color:#c0392b':''}">${stockBas}</div><div class="stat-label">Stock bas ⚠</div></div>`;
+    <div class="stat-card${stockBas?' red':''}"><div class="stat-value">${stockBas}</div><div class="stat-label">Stock bas ⚠</div></div>`;
   const top=noted.slice().sort((a,b)=>parseFloat(b.note)-parseFloat(a.note)).slice(0,5);
-  document.getElementById('top5').innerHTML=top.length?`<div style="display:flex;gap:10px;flex-wrap:wrap;">${top.map((t,i)=>`<div style="background:#fff;border:1px solid var(--border);${i===0?'border-color:var(--accent);border-width:2px':''}border-radius:4px;padding:12px;flex:1;min-width:130px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:3px;">${['🥇','🥈','🥉','4️⃣','5️⃣'][i]}</div><div style="font-weight:600;font-size:12px;margin-bottom:4px;">${t.nom}</div><div>${starsDisplay(t.note)}</div><div class="note-num">${parseFloat(t.note).toFixed(1)}/20</div></div>`).join('')}</div>`:'<p style="color:var(--ink-light);font-size:12px">Aucun thé noté.</p>';
+  document.getElementById('top5').innerHTML=top.length?`<div style="display:flex;gap:10px;flex-wrap:wrap;">${top.map((t,i)=>`<div class="top5-card" style="${i===0?'border-color:var(--accent);border-width:2px;':''}"><div style="font-size:1.5rem;margin-bottom:3px;">${['🥇','🥈','🥉','4️⃣','5️⃣'][i]}</div><div style="font-weight:600;font-size:12px;margin-bottom:4px;">${esc(t.nom)}</div><div>${starsDisplay(t.note)}</div><div class="note-num">${parseFloat(t.note).toFixed(1)}/20</div></div>`).join('')}</div>`:'<p style="color:var(--ink-light);font-size:12px">Aucun thé noté.</p>';
   const byT={};all.forEach(t=>byT[t.type]=(byT[t.type]||0)+1);const mT=Math.max(...Object.values(byT),1);
-  document.getElementById('chart-type').innerHTML=Object.entries(byT).sort((a,b)=>b[1]-a[1]).map(([type,cnt])=>`<div class="bar-row"><div class="bar-label">${TYPE_ICONS[type]||''} ${type}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mT*100}%;background:${TYPE_COLORS[type]||'#888'}"></div></div><div class="bar-count">${cnt}</div></div>`).join('');
+  document.getElementById('chart-type').innerHTML=Object.entries(byT).sort((a,b)=>b[1]-a[1]).map(([type,cnt])=>`<div class="bar-row"><div class="bar-label">${TYPE_ICONS[type]||''} ${esc(type)}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mT*100}%;background:${TYPE_COLORS[type]||'#888'}"></div></div><div class="bar-count">${cnt}</div></div>`).join('');
   const byO={};all.forEach(t=>{if(t.origine)byO[t.origine]=(byO[t.origine]||0)+1;});const mO=Math.max(...Object.values(byO),1);
-  document.getElementById('chart-origine').innerHTML=Object.entries(byO).sort((a,b)=>b[1]-a[1]).map(([o,cnt])=>`<div class="bar-row"><div class="bar-label">${o}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mO*100}%;background:var(--tea-green)"></div></div><div class="bar-count">${cnt}</div></div>`).join('')||'<p style="color:var(--ink-light);font-size:12px">Aucune origine.</p>';
+  document.getElementById('chart-origine').innerHTML=Object.entries(byO).sort((a,b)=>b[1]-a[1]).map(([o,cnt])=>`<div class="bar-row"><div class="bar-label" title="${esc(o)}">${esc(o)}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mO*100}%;background:var(--tea-green)"></div></div><div class="bar-count">${cnt}</div></div>`).join('')||'<p style="color:var(--ink-light);font-size:12px">Aucune origine.</p>';
   const byF={};all.forEach(t=>{if(!t.fournisseur)return;if(!byF[t.fournisseur])byF[t.fournisseur]={count:0,valeurStock:0,notes:[],url:t.url||''};byF[t.fournisseur].count++;if(t.prix&&t.stock)byF[t.fournisseur].valeurStock+=parseFloat(t.prix)*parseFloat(t.stock)/100;if(t.note)byF[t.fournisseur].notes.push(parseFloat(t.note));});
-  document.querySelector('#table-fournisseurs tbody').innerHTML=Object.entries(byF).sort((a,b)=>b[1].count-a[1].count).map(([f,d])=>{const avg=d.notes.length?(d.notes.reduce((s,v)=>s+v,0)/d.notes.length).toFixed(1)+'/20':'—';const link=d.url?`<a href="${d.url}" target="_blank">🔗</a>`:'—';return`<tr><td>${f}</td><td>${link}</td><td>${d.count}</td><td>${avg}</td><td>${d.valeurStock>0?d.valeurStock.toFixed(2)+' €':'—'}</td></tr>`;}).join('')||'<tr><td colspan="5" style="color:var(--ink-light);font-style:italic">Aucun fournisseur.</td></tr>';
+  document.querySelector('#table-fournisseurs tbody').innerHTML=Object.entries(byF).sort((a,b)=>b[1].count-a[1].count).map(([f,d])=>{const avg=d.notes.length?(d.notes.reduce((s,v)=>s+v,0)/d.notes.length).toFixed(1)+'/20':'—';const u=safeUrl(d.url);const link=u?`<a href="${u}" target="_blank" rel="noopener">🔗</a>`:'—';return`<tr><td>${esc(f)}</td><td>${link}</td><td>${d.count}</td><td>${avg}</td><td>${d.valeurStock>0?d.valeurStock.toFixed(2)+' €':'—'}</td></tr>`;}).join('')||'<tr><td colspan="5" style="color:var(--ink-light);font-style:italic">Aucun fournisseur.</td></tr>';
 }
 
+/* ============ EXPORT / IMPORT ============ */
 const CSV_H=['nom','type','origine','statut','fournisseur','prix','note','commentaire','bio','sauvage','stock','url','subcategory','dateAchat'];
 function teasToCSV(){return[CSV_H.join(','),...TEAS.map(t=>CSV_H.map(h=>`"${(t[h]===undefined||t[h]===null?'':String(t[h])).replace(/"/g,'""')}"`).join(','))].join('\n');}
-function openExportModal(){document.getElementById('csv-output').value=teasToCSV();openModal('modal-export');}
-function downloadCSV(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([teasToCSV()],{type:'text/csv;charset=utf-8;'}));a.download='ma-collection-thes.csv';a.click();}
+function teasToJSON(){return JSON.stringify(TEAS,null,2);}
+
+let _exportMode='json';
+function setExportMode(m){
+  _exportMode=m;
+  document.getElementById('csv-output').value=m==='json'?teasToJSON():teasToCSV();
+  document.getElementById('exp-btn-json').className='btn '+(m==='json'?'btn-accent':'btn-ghost');
+  document.getElementById('exp-btn-csv').className='btn '+(m==='csv'?'btn-accent':'btn-ghost');
+}
+function openExportModal(){setExportMode('json');openModal('modal-export');}
+function downloadExport(){
+  const isJson=_exportMode==='json';
+  const blob=new Blob([isJson?teasToJSON():teasToCSV()],{type:isJson?'application/json':'text/csv;charset=utf-8;'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=isJson?'ma-collection-thes.json':'ma-collection-thes.csv';a.click();
+}
 function openImportModal(){document.getElementById('csv-input').value='';openModal('modal-import');}
-function importCSV(){
-  const raw=document.getElementById('csv-input').value.trim();if(!raw)return;
-  const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);if(lines.length<2){showToast('CSV invalide.');return;}
-  const headers=lines[0].split(',').map(h=>h.replace(/"/g,'').trim().toLowerCase());
-  const idx=h=>headers.indexOf(h),parse=c=>c.replace(/^"|"$/g,'').replace(/""/g,'"').trim();
-  const newT=[];
-  for(let i=1;i<lines.length;i++){const cells=lines[i].match(/("(?:[^"]|"")*"|[^,]*)/g)||[];const nom=parse(cells[idx('nom')]||'');if(!nom)continue;
-    newT.push({id:Date.now().toString(36)+i+Math.random().toString(36).slice(2),nom,type:parse(cells[idx('type')]||'')||'autre',origine:parse(cells[idx('origine')]||''),statut:parse(cells[idx('statut')]||'')||'en-stock',fournisseur:parse(cells[idx('fournisseur')]||''),prix:parse(cells[idx('prix')]||''),note:parse(cells[idx('note')]||''),commentaire:parse(cells[idx('commentaire')]||''),bio:parse(cells[idx('bio')]||'')==='true',sauvage:parse(cells[idx('sauvage')]||'')==='true',stock:parse(cells[idx('stock')]||''),url:parse(cells[idx('url')]||''),subcategory:parse(cells[idx('subcategory')]||''),dateAchat:parse(cells[idx('dateachat')]||'')});}
-  TEAS=newT;saveLocal();renderAll();closeModal('modal-import');pushToGitHub();showToast(`${newT.length} thés importés ✓`);
+
+/* Parseur CSV correct (guillemets, virgules et retours à la ligne dans les champs) */
+function parseCSV(text){
+  const rows=[];let row=[],cur='',inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQ){
+      if(c==='"'){if(text[i+1]==='"'){cur+='"';i++;}else inQ=false;}
+      else cur+=c;
+    }else{
+      if(c==='"')inQ=true;
+      else if(c===','){row.push(cur);cur='';}
+      else if(c==='\n'||c==='\r'){
+        if(c==='\r'&&text[i+1]==='\n')i++;
+        row.push(cur);cur='';
+        if(row.length>1||row[0].trim()!=='')rows.push(row);
+        row=[];
+      }else cur+=c;
+    }
+  }
+  row.push(cur);
+  if(row.length>1||row[0].trim()!=='')rows.push(row);
+  return rows;
 }
 
+function importData(){
+  const raw=document.getElementById('csv-input').value.trim();if(!raw)return;
+  let newT=[];
+  try{
+    if(raw[0]==='['){ /* JSON complet */
+      const arr=JSON.parse(raw);
+      if(!Array.isArray(arr))throw new Error('format');
+      newT=arr.filter(t=>t&&t.nom).map((t,i)=>({...t,id:t.id||Date.now().toString(36)+i+Math.random().toString(36).slice(2)}));
+    }else{ /* CSV */
+      const rows=parseCSV(raw);
+      if(rows.length<2){showToast('CSV invalide.',true);return;}
+      const headers=rows[0].map(h=>h.trim().toLowerCase());
+      const idx=h=>headers.indexOf(h);
+      const get=(cells,h)=>{const i=idx(h);return i>=0?(cells[i]||'').trim():'';};
+      for(let i=1;i<rows.length;i++){
+        const cells=rows[i];const nom=get(cells,'nom');if(!nom)continue;
+        newT.push({id:Date.now().toString(36)+i+Math.random().toString(36).slice(2),nom,type:get(cells,'type')||'autre',origine:get(cells,'origine'),statut:get(cells,'statut')||'en-stock',fournisseur:get(cells,'fournisseur'),prix:get(cells,'prix'),note:get(cells,'note'),commentaire:get(cells,'commentaire'),bio:get(cells,'bio')==='true',sauvage:get(cells,'sauvage')==='true',stock:get(cells,'stock'),url:get(cells,'url'),subcategory:get(cells,'subcategory'),dateAchat:get(cells,'dateachat')});
+      }
+    }
+  }catch(e){showToast('Import invalide : '+(e.message||'format non reconnu'),true);return;}
+  if(!newT.length){showToast('Aucun thé trouvé dans l\'import.',true);return;}
+  if(!confirm(`Remplacer la collection actuelle (${TEAS.length} thés) par ${newT.length} thés importés ?`))return;
+  TEAS=newT;saveLocal();renderAll();closeModal('modal-import');schedulePush();showToast(`${newT.length} thés importés ✓`);
+}
+
+/* ============ MODALES / TOAST / CLAVIER ============ */
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));document.getElementById('deg-mode-overlay').classList.remove('open');}
-  if(e.key==='n'&&!e.target.matches('input,textarea,select')&&getToken())openAddModal();
+  if(e.key==='n'&&!e.target.matches('input,textarea,select')&&getToken()&&!document.querySelector('.modal-overlay.open'))openAddModal();
 });
 
 let toastTimer;
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2800);}
+function showToast(msg,isError){const t=document.getElementById('toast');t.textContent=msg;t.classList.toggle('error',!!isError);t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3200);}
 
-async function pushToGitHub(){
-  const token=getToken();if(!token)return;setSaving(true);
-  try{
-    const res=await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}?ref=${GITHUB_BRANCH}`,{headers:{Authorization:`token ${token}`,Accept:'application/vnd.github.v3+json'}});
-    const fd=await res.json();
-    let html=atob(fd.content.replace(/\n/g,''));
-    const marker='/* __TEAS_DATA__ */';
-    const nb=`/* __TEAS_DATA__ */\nconst TEAS_INIT=${JSON.stringify(TEAS)};`;
-    html=html.includes(marker)?html.replace(/\/\* __TEAS_DATA__ \*\/[\s\S]*?;/,nb):html.replace('function init(){',nb+'\n\nfunction init(){');
-    const content=btoa(unescape(encodeURIComponent(html)));
-    await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`,{method:'PUT',headers:{Authorization:`token ${token}`,'Content-Type':'application/json'},body:JSON.stringify({message:'update: collection de thés',content,sha:fd.sha,branch:GITHUB_BRANCH})});
-    showToast('Sauvegardé sur GitHub ✓');
-  }catch(e){console.error(e);showToast('Erreur GitHub – sauvegardé en local');}
-  finally{setSaving(false);}
+/* ============ INIT ============ */
+async function init(){
+  applyTheme(document.documentElement.dataset.theme||'light');
+  buildStars();buildDmStars();updateTokenStatus();
+  await loadData();
+  renderAll();
 }
-function setSaving(v){document.getElementById('saving-indicator').classList.toggle('visible',v);}
+document.addEventListener('DOMContentLoaded',init);
 
-/* __TEAS_DATA__ */
-const TEAS_INIT=[];
-
-document.addEventListener('DOMContentLoaded',()=>{
-  if(!localStorage.getItem('teas_data')&&TEAS_INIT.length){TEAS=TEAS_INIT;saveLocal();}
-  init();
-});
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
 </script>
 </body>
 </html>
