@@ -89,6 +89,9 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .prix-cell{white-space:nowrap;}.prix-100{font-weight:500;}.prix-kg{font-size:11px;color:var(--ink-light);}
 .badges-cell{display:flex;gap:2px;align-items:center;}
 .stock-cell{white-space:nowrap;font-size:12px;}.stock-low{color:var(--danger);font-weight:600;}.stock-ok{color:var(--tea-green);}
+/* ===== Marque BIO : carré vert ===== */
+.bio-sq{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:3px;background:var(--tea-green);color:#fff;font-family:'Zen Kaku Gothic New',sans-serif;font-size:9px;font-weight:700;letter-spacing:.04em;line-height:1;text-transform:lowercase;flex-shrink:0;}
+.bio-sq.sm{width:17px;height:17px;font-size:7.5px;border-radius:2px;}
 .statut-btns{display:flex;gap:3px;flex-wrap:wrap;}
 .statut-btn{padding:3px 7px;border-radius:2px;border:1px solid var(--border);background:var(--card);font-size:11px;font-weight:500;cursor:pointer;font-family:'Zen Kaku Gothic New',sans-serif;transition:all .15s;white-space:nowrap;}
 .statut-btn.s-en-stock{background:#e8f0e0;border-color:#5a7a4a;color:#3d6028;}
@@ -188,6 +191,25 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .deg-mode-note .si{font-size:26px;}
 .deg-mode-comment{width:100%;max-width:480px;background:rgba(245,240,232,.08);border:none;border-bottom:1px solid rgba(245,240,232,.3);color:#f5f0e8;font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;padding:8px;outline:none;border-radius:0;margin-bottom:20px;}
 .deg-mode-comment::placeholder{color:rgba(245,240,232,.4);}
+/* ===== Diagnostic GitHub ===== */
+.diag-out{display:flex;flex-direction:column;gap:6px;}
+.diag-idle{font-size:12px;color:var(--ink-light);font-style:italic;}
+.diag-step{display:flex;gap:9px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:3px;padding:9px 11px;}
+.diag-step.ok{border-left-color:var(--tea-green);}
+.diag-step.ko{border-left-color:var(--danger);}
+.diag-step.warn{border-left-color:var(--oolong);}
+.diag-step.run{border-left-color:var(--ink-light);opacity:.7;}
+.diag-mark{font-size:14px;line-height:1.3;flex-shrink:0;width:16px;text-align:center;}
+.diag-step.ok .diag-mark{color:var(--tea-green);}
+.diag-step.ko .diag-mark{color:var(--danger);}
+.diag-step.warn .diag-mark{color:var(--oolong);}
+.diag-body{flex:1;min-width:0;}
+.diag-label{font-size:12px;font-weight:600;margin-bottom:2px;}
+.diag-detail{font-size:11.5px;color:var(--ink-light);line-height:1.45;word-break:break-word;}
+.diag-detail code{font-family:monospace;font-size:11px;background:var(--panel);padding:1px 4px;border-radius:2px;}
+.diag-fix{margin-top:5px;font-size:11.5px;line-height:1.45;background:var(--panel);border-radius:3px;padding:7px 9px;color:var(--ink);}
+.diag-fix strong{color:var(--danger);}
+.diag-fix a{color:var(--tea-green);}
 .csv-area{width:100%;height:160px;font-family:monospace;font-size:11px;padding:7px;border:1px solid var(--border);border-radius:2px;resize:vertical;background:var(--card);color:var(--ink);}
 .toast{position:fixed;bottom:20px;right:20px;background:var(--header-bg);color:var(--header-fg);padding:9px 16px;border-radius:2px;font-size:12px;z-index:999;border-left:4px solid var(--accent);opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;max-width:calc(100vw - 40px);}
 .toast.show{opacity:1;transform:translateY(0);}
@@ -197,8 +219,87 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .spinner{width:10px;height:10px;border:2px solid rgba(245,240,232,.3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
 .kbd{font-family:monospace;background:rgba(245,240,232,.15);border:1px solid rgba(245,240,232,.25);border-radius:3px;padding:1px 5px;font-size:10px;}
+/* ============================================================
+   ÉTIQUETTES — 105 × 74 mm, 8 poses par planche A4 Betckey
+   Monochrome, calibré pour laser noir et blanc.
+   ============================================================ */
+.lab-layout{display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:start;}
+.lab-picker{background:var(--card);border:1px solid var(--border);border-radius:4px;box-shadow:var(--shadow);max-height:calc(100vh - 260px);overflow:auto;}
+.lab-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--border);cursor:pointer;}
+.lab-row:last-child{border-bottom:none;}
+.lab-row:hover{background:var(--card-hover);}
+.lab-row input[type="checkbox"]{width:17px;height:17px;accent-color:var(--tea-green);flex-shrink:0;cursor:pointer;}
+.lab-row-main{flex:1;min-width:0;}
+.lab-row-name{font-size:13px;font-weight:500;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.lab-row-sub{font-size:11px;color:var(--ink-light);display:flex;align-items:center;gap:6px;}
+.lab-qty{display:flex;align-items:center;gap:2px;flex-shrink:0;}
+.lab-qty button{width:26px;height:26px;border:1px solid var(--border);background:var(--card);color:var(--ink);border-radius:2px;cursor:pointer;font-size:14px;line-height:1;padding:0;}
+.lab-qty button:hover{border-color:var(--tea-green);color:var(--tea-green);}
+.lab-qty span{min-width:22px;text-align:center;font-size:13px;font-weight:600;}
+.lab-side{position:sticky;top:80px;}
+.lab-opts{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:14px;box-shadow:var(--shadow);}
+.lab-opt-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.lab-opt-row label{font-size:12px;}
+.lab-opt-row input{width:64px;padding:6px 8px;border:1px solid var(--border);border-radius:2px;background:var(--card);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;text-align:center;}
+.lab-hint{font-size:11px;color:var(--ink-light);line-height:1.45;margin-top:5px;}
+.lab-check{display:flex;align-items:center;gap:7px;font-size:12px;margin-top:9px;cursor:pointer;}
+.lab-check input{width:15px;height:15px;accent-color:var(--tea-green);cursor:pointer;}
+.lab-summary{margin-top:12px;padding:10px;background:var(--panel);border-radius:3px;font-size:12px;line-height:1.5;}
+.lab-summary strong{font-family:'Shippori Mincho',serif;font-size:15px;}
+.lab-preview-wrap{overflow:hidden;}
+#lab-preview{transform-origin:top left;display:flex;flex-direction:column;gap:10px;}
+.lab-empty{font-size:12px;color:var(--ink-light);font-style:italic;padding:22px 14px;text-align:center;}
+
+/* --- L'étiquette elle-même : toujours noir sur blanc --- */
+.lab{width:105mm;height:74.25mm;background:#fff;color:#111;padding:8mm 9mm 7mm;display:flex;flex-direction:column;
+     position:relative;overflow:hidden;font-family:'Bodoni Moda',Georgia,'Times New Roman',serif;box-sizing:border-box;}
+.lab.shadow{box-shadow:0 2px 14px rgba(0,0,0,.16);}
+.lab-top{display:flex;gap:6mm;align-items:flex-start;}
+.lab-seal{width:19mm;height:19mm;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;
+          font-family:'Noto Serif SC','Shippori Mincho',serif;font-weight:600;font-size:12mm;line-height:1;flex-shrink:0;}
+.lab-seal.mono{font-family:'Bodoni Moda',Georgia,serif;font-size:10mm;font-weight:400;}
+.lab-head{flex:1;min-width:0;padding-top:.6mm;}
+.lab.has-bio .lab-head{padding-right:11mm;}
+.lab-name{font-weight:500;line-height:1.04;margin-bottom:2.2mm;}
+.lab-gloss{font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-weight:300;font-size:3mm;letter-spacing:.07em;color:#4a4a4a;line-height:1.45;}
+.lab-gloss em{font-style:italic;color:#767676;}
+.lab-bio{position:absolute;top:7.5mm;right:9mm;width:9.5mm;height:9.5mm;border:.35mm solid #111;display:flex;align-items:center;
+         justify-content:center;font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-size:2.7mm;font-weight:500;letter-spacing:.05em;color:#111;}
+.lab-foot{margin-top:auto;}
+.lab-brew{text-align:right;font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-weight:400;font-size:2.7mm;letter-spacing:.19em;
+          text-transform:uppercase;color:#4a4a4a;margin-bottom:2mm;min-height:3mm;}
+.lab-brew i{font-style:normal;color:#a0a0a0;}
+.lab-rule{height:.25mm;background:#111;}
+.lab-meta{margin-top:3.2mm;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;}
+.lab-meta dt{font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-size:2.1mm;letter-spacing:.22em;text-transform:uppercase;color:#8a8a8a;margin-bottom:1.1mm;}
+.lab-meta dd{font-size:3.5mm;line-height:1.15;color:#111;overflow-wrap:anywhere;}
+
+/* --- Planches d'impression --- */
+#label-sheets{display:none;}
+.sheet{width:210mm;height:297mm;display:grid;grid-template-columns:105mm 105mm;grid-template-rows:repeat(4,74.25mm);background:#fff;}
+.cell{width:105mm;height:74.25mm;overflow:hidden;}
+.sheet.marks .cell{outline:.1mm dashed #bbb;outline-offset:-.05mm;}
+@media print{
+  @page{size:A4 portrait;margin:0;}
+  html,body{background:#fff!important;margin:0;padding:0;}
+  body>*{display:none!important;}
+  #label-sheets{display:block!important;}
+  .sheet{page-break-after:always;break-after:page;}
+  .sheet:last-child{page-break-after:auto;break-after:auto;}
+  .lab{box-shadow:none!important;}
+}
+
 /* ===== Mobile : vue cartes ===== */
 @media(max-width:700px){
+  .lab-layout{grid-template-columns:1fr;gap:16px;}
+  .lab-side{position:static;}
+  .lab-picker{max-height:none;}
+  .lab-row{padding:11px 12px;}
+  .lab-qty button{width:32px;height:32px;font-size:16px;}
+  #token-banner{gap:8px;}
+  #token-banner input{max-width:none;}
+  .modal{max-height:96vh;}
+  .diag-step{padding:11px;}
   header{padding:12px 14px;}
   main{padding:14px;}
   .tabs{padding:0 14px;}
@@ -247,6 +348,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   <input type="password" id="token-input" placeholder="github_pat_… ou ghp_…" aria-label="Token GitHub" />
   <button class="btn btn-accent" onclick="saveToken()">Enregistrer</button>
   <button class="btn btn-outline" onclick="clearToken()">Effacer</button>
+  <button class="btn btn-outline" onclick="openDiag()">🩺 Diagnostic</button>
   <span id="token-status"></span>
   <span class="token-hint">Conseil : créez un <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> limité au seul dépôt <strong>thes</strong>, permission « Contents : Read and write ». Il n'aura accès à rien d'autre.</span>
 </div>
@@ -256,6 +358,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   <button class="tab-btn" onclick="switchTab('racheter')" id="tab-racheter">À racheter</button>
   <button class="tab-btn" onclick="switchTab('souhait')" id="tab-souhait">✨ Souhaits</button>
   <button class="tab-btn" onclick="switchTab('stats')" id="tab-stats">Statistiques</button>
+  <button class="tab-btn" onclick="switchTab('etiquettes')" id="tab-etiquettes">Étiquettes</button>
 </nav>
 
 <main>
@@ -279,7 +382,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
       <select id="filter-fournisseur" onchange="renderCollection()" aria-label="Filtrer par fournisseur"><option value="">Tous fournisseurs</option></select>
       <select id="filter-bio" onchange="renderCollection()" aria-label="Filtrer bio ou sauvage">
         <option value="">Tous</option>
-        <option value="bio">🌿 Bio</option>
+        <option value="bio">■ Bio</option>
         <option value="sauvage">🌲 Sauvage</option>
       </select>
       <span class="count-badge" id="count-badge"></span>
@@ -290,7 +393,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
         <thead><tr>
           <th class="sortable" onclick="sortBy('nom')" id="th-nom">Nom ↕</th>
           <th class="sortable" onclick="sortBy('type')" id="th-type">Type ↕</th>
-          <th>🌿</th>
+          <th>Bio</th>
           <th>Statut</th>
           <th class="sortable" onclick="sortBy('stock')" id="th-stock">Stock ↕</th>
           <th class="sortable" onclick="sortBy('note')" id="th-note">Note ↕</th>
@@ -328,6 +431,48 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
         <tbody id="souhait-tbody"></tbody>
       </table>
       <div id="souhait-empty" class="empty-state" style="display:none"><div class="icon">✨</div><p>Aucun souhait pour l'instant.</p></div>
+    </div>
+  </div>
+
+  <div id="view-etiquettes" style="display:none">
+    <div class="filters-bar">
+      <input type="text" id="lab-search" placeholder="Rechercher…" oninput="renderLabPicker()" aria-label="Rechercher un thé" />
+      <select id="lab-statut" onchange="renderLabPicker()" aria-label="Filtrer par statut">
+        <option value="en-stock">En stock</option>
+        <option value="">Tous (hors souhaits)</option>
+        <option value="a-racheter">À racheter</option>
+        <option value="epuise">Épuisé</option>
+      </select>
+      <button class="btn btn-ghost" onclick="labSelectAll(true)">Tout cocher</button>
+      <button class="btn btn-ghost" onclick="labSelectAll(false)">Tout décocher</button>
+      <span class="count-badge" id="lab-count"></span>
+    </div>
+
+    <div class="lab-layout">
+      <div>
+        <div class="section-title">Thés à étiqueter</div>
+        <div class="lab-picker" id="lab-picker"></div>
+      </div>
+
+      <div class="lab-side">
+        <div class="section-title">Planche</div>
+        <div class="lab-opts">
+          <div class="lab-opt-row">
+            <label for="lab-offset">Commencer à la pose n°</label>
+            <input type="number" id="lab-offset" min="1" max="8" value="1" onchange="renderLabSummary()" />
+          </div>
+          <p class="lab-hint">Pour réutiliser une planche déjà entamée. Les poses précédentes sont laissées vides.</p>
+          <label class="lab-check"><input type="checkbox" id="lab-marks" onchange="renderLabPreview()" /> Traits de découpe</label>
+          <label class="lab-check"><input type="checkbox" id="lab-family" checked onchange="renderLabPreview()" /> Glose de famille en repli</label>
+          <label class="lab-check"><input type="checkbox" id="lab-biomark" checked onchange="renderLabPreview()" /> Mention « bio »</label>
+          <div class="lab-summary" id="lab-summary"></div>
+          <button class="btn btn-accent" style="width:100%;margin-top:10px;padding:10px" onclick="printLabels()">⎙ Imprimer la planche</button>
+          <p class="lab-hint" style="margin-top:8px">Format 105 × 74 mm, 8 poses par A4 (Betckey). Dans la boîte d'impression : échelle <strong>100 %</strong>, marges <strong>aucune</strong>.</p>
+        </div>
+
+        <div class="section-title" style="margin-top:18px">Aperçu</div>
+        <div class="lab-preview-wrap" id="lab-preview-wrap"><div id="lab-preview"></div></div>
+      </div>
     </div>
   </div>
 
@@ -423,7 +568,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
         <div class="form-group">
           <label>Caractéristiques</label>
           <div class="toggle-group">
-            <button type="button" class="toggle-btn" id="toggle-bio" onclick="toggleBio()">🌿 Bio</button>
+            <button type="button" class="toggle-btn" id="toggle-bio" onclick="toggleBio()"><span class="bio-sq sm">bio</span> Bio</button>
             <button type="button" class="toggle-btn" id="toggle-sauvage" onclick="toggleSauvage()">🌲 Sauvage</button>
           </div>
         </div>
@@ -565,6 +710,33 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   </div>
 </div>
 
+<div id="label-sheets"></div>
+
+<!-- MODAL DIAGNOSTIC GITHUB -->
+<div class="modal-overlay" id="modal-diag">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>🩺 Diagnostic GitHub</h2>
+      <button class="modal-close" onclick="closeModal('modal-diag')" aria-label="Fermer">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:var(--ink-light);margin-bottom:10px">
+        Vérifie la chaîne complète : token → authentification → dépôt → branche → fichier → droit d'écriture.
+        Le token n'est jamais affiché ni copié dans le rapport.
+      </p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+        <button class="btn btn-accent" id="diag-run" onclick="runDiag()">▶ Lancer le diagnostic</button>
+        <button class="btn btn-ghost" id="diag-write" onclick="diagWriteTest()">✎ Test d'écriture réel</button>
+        <button class="btn btn-ghost" onclick="copyDiag()">⧉ Copier le rapport</button>
+      </div>
+      <div id="diag-out" class="diag-out"><p class="diag-idle">Aucun diagnostic lancé.</p></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-diag')">Fermer</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -661,12 +833,241 @@ function saveToken(){const v=document.getElementById('token-input').value.trim()
 function clearToken(){localStorage.removeItem('gh_token');document.getElementById('token-input').value='';updateTokenStatus();showToast('Token effacé');}
 function updateTokenStatus(){const t=getToken(),el=document.getElementById('token-status'),btn=document.getElementById('btn-add');if(t){el.textContent='✓ Actif';el.style.color='#90d070';btn&&btn.classList.remove('hidden');}else{el.textContent='⚠ Lecture seule';el.style.color='#f0c060';btn&&btn.classList.add('hidden');}}
 
+/* ============ DIAGNOSTIC GITHUB ============ */
+let _diagSteps=[],_diagBusy=false;
+
+function openDiag(){_diagSteps=[];renderDiag();openModal('modal-diag');}
+
+function renderDiag(){
+  const el=document.getElementById('diag-out');
+  if(!_diagSteps.length){el.innerHTML='<p class="diag-idle">Aucun diagnostic lancé.</p>';return;}
+  el.innerHTML=_diagSteps.map(s=>`<div class="diag-step ${s.state}">
+    <div class="diag-mark">${{ok:'✓',ko:'✕',warn:'!',run:'…',info:'·'}[s.state]||'·'}</div>
+    <div class="diag-body">
+      <div class="diag-label">${esc(s.label)}</div>
+      <div class="diag-detail">${s.detail||''}</div>
+      ${s.fix?`<div class="diag-fix">${s.fix}</div>`:''}
+    </div>
+  </div>`).join('');
+}
+function dStep(label){const s={state:'run',label,detail:'en cours…',fix:''};_diagSteps.push(s);renderDiag();return s;}
+function dSet(s,state,detail,fix){s.state=state;s.detail=detail||'';s.fix=fix||'';renderDiag();}
+
+/* Lecture d'un en-tête en tolérant les restrictions CORS */
+const hdr=(r,n)=>{try{return r.headers.get(n)||'';}catch(e){return '';}};
+
+async function runDiag(){
+  if(_diagBusy)return;
+  _diagBusy=true;
+  const btn=document.getElementById('diag-run');btn.disabled=true;btn.textContent='… Diagnostic en cours';
+  _diagSteps=[];renderDiag();
+  try{ await diagSequence(); }
+  catch(e){ dSet(dStep('Diagnostic interrompu'),'ko',esc(e.message||String(e))); }
+  finally{ _diagBusy=false;btn.disabled=false;btn.textContent='▶ Relancer le diagnostic'; }
+}
+
+async function diagSequence(){
+  const raw=localStorage.getItem('gh_token')||'';
+  const t=raw.trim();
+
+  /* --- 1. Contexte --- */
+  let s=dStep('Contexte de la page');
+  const proto=location.protocol,online=navigator.onLine;
+  let ctxWarn='';
+  if(proto==='file:')ctxWarn='La page est ouverte en <code>file://</code> : le chargement de <code>thes.json</code> et le service worker ne fonctionneront pas. Passez par GitHub Pages ou un serveur local.';
+  dSet(s,ctxWarn?'warn':'ok',
+    `Origine <code>${esc(location.origin||'file://')}</code> · réseau ${online?'connecté':'<strong>hors ligne</strong>'} · dépôt visé <code>${GITHUB_OWNER}/${GITHUB_REPO}</code>, branche <code>${GITHUB_BRANCH}</code>, fichier <code>${DATA_FILE}</code>`,
+    ctxWarn||(online?'':'Sans réseau, seules les données locales sont disponibles. Les modifications seront poussées au retour de la connexion.'));
+
+  /* --- 2. Forme du token --- */
+  s=dStep('Format du token');
+  if(!t){
+    dSet(s,'ko','Aucun token enregistré dans ce navigateur.',
+      'Collez un token dans le champ ci-dessus puis appuyez sur <strong>Enregistrer</strong>. Sans token, l\'application reste en lecture seule.');
+    return;
+  }
+  const dirty=raw!==t;
+  let kind='inconnu',fine=false;
+  if(/^github_pat_/.test(t)){kind='fine-grained (recommandé)';fine=true;}
+  else if(/^ghp_/.test(t))kind='classique (PAT)';
+  else if(/^gh[ousr]_/.test(t))kind='jeton OAuth/App';
+  const bad=/[\s"'<>]/.test(t);
+  let fmtFix='';
+  if(kind==='inconnu')fmtFix='Le token ne commence ni par <code>github_pat_</code> ni par <code>ghp_</code>. Il s\'agit peut-être d\'autre chose (mot de passe, clé SSH, identifiant) — regénérez un token depuis GitHub.';
+  if(bad)fmtFix='<strong>Le token contient un espace, un guillemet ou un retour à la ligne.</strong> C\'est la cause n°1 des échecs : recopiez-le sans rien autour.';
+  else if(dirty)fmtFix='Des espaces entouraient le token ; ils ont été ignorés ici, mais ré-enregistrez-le proprement.';
+  dSet(s,(bad||kind==='inconnu')?'ko':'ok',
+    `Type ${esc(kind)} · ${t.length} caractères · commence par <code>${esc(t.slice(0,Math.min(11,t.length)))}…</code>`,fmtFix);
+  if(bad)return;
+
+  /* --- 3. Authentification --- */
+  s=dStep('Authentification');
+  let user=null,r;
+  try{
+    r=await fetch('https://api.github.com/user',{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+  }catch(e){
+    dSet(s,'ko','Impossible de joindre <code>api.github.com</code>.',
+      'Réseau coupé, mode avion, VPN, bloqueur de publicité ou pare-feu d\'entreprise. Essayez en 4G ou depuis un autre réseau.');
+    return;
+  }
+  const expH=hdr(r,'github-authentication-token-expiration');
+  const scopes=hdr(r,'x-oauth-scopes');
+  const remain=hdr(r,'x-ratelimit-remaining');
+  if(r.status===401){
+    dSet(s,'ko','GitHub répond <code>401 Unauthorized</code> — le token est refusé.',
+      'Trois causes possibles : le token a <strong>expiré</strong>, il a été <strong>révoqué</strong> (GitHub révoque automatiquement tout token publié dans un dépôt public), ou il a été mal copié. Regénérez-en un : <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">créer un fine-grained token</a>.');
+    return;
+  }
+  if(r.status===403){
+    dSet(s,'ko','GitHub répond <code>403 Forbidden</code>.',
+      remain==='0'?'Quota d\'API épuisé. Attendez la réinitialisation (une heure au maximum).':'Token valide mais bloqué. Si le dépôt appartient à une organisation, un administrateur doit approuver le token dans <em>Settings → Personal access tokens → Pending requests</em>.');
+    return;
+  }
+  if(!r.ok){dSet(s,'ko',`Réponse inattendue <code>HTTP ${r.status}</code>.`,'Réessayez dans quelques minutes ; GitHub est peut-être en incident (<a href="https://www.githubstatus.com" target="_blank" rel="noopener">githubstatus.com</a>).');return;}
+  user=await r.json();
+  let expWarn='';
+  if(expH){
+    const d=new Date(expH.replace(' UTC','Z').replace(' ','T'));
+    if(!isNaN(d)){
+      const days=Math.round((d-Date.now())/86400000);
+      expWarn=days<0?'<strong>Ce token est expiré.</strong> Regénérez-le.':days<=7?`<strong>Ce token expire dans ${days} jour(s).</strong> Pensez à le renouveler.`:'';
+      var expTxt=` · expire le ${d.toLocaleDateString('fr-FR')} (${days} j)`;
+    }
+  }
+  dSet(s,expWarn?'warn':'ok',
+    `Connecté en tant que <code>${esc(user.login)}</code>${typeof expTxt!=='undefined'?expTxt:' · sans date d\'expiration'}${scopes?` · portées : <code>${esc(scopes)}</code>`:''}`,expWarn);
+
+  /* --- 4. Accès au dépôt --- */
+  s=dStep('Accès au dépôt');
+  const repoUrl=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}`;
+  r=await fetch(repoUrl,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+  if(r.status===404){
+    dSet(s,'ko',`Le dépôt <code>${GITHUB_OWNER}/${GITHUB_REPO}</code> est introuvable <em>avec ce token</em>.`,
+      fine?`Avec un token fine-grained, un 404 signifie presque toujours que <strong>le dépôt n'est pas coché dans le token</strong>, pas qu'il n'existe pas. Ouvrez le token sur GitHub → <em>Repository access</em> → <em>Only select repositories</em> → cochez <strong>${GITHUB_REPO}</strong>. Vérifiez aussi que le propriétaire est bien <code>${GITHUB_OWNER}</code> (le token doit être créé sous ce compte).`
+          :`Le token n'a pas la portée <code>repo</code>, ou le dépôt <code>${GITHUB_REPO}</code> n'existe pas sous le compte <code>${GITHUB_OWNER}</code>. Vérifiez l'orthographe exacte, majuscules comprises.`);
+    return;
+  }
+  if(!r.ok){dSet(s,'ko',`Réponse <code>HTTP ${r.status}</code> sur le dépôt.`,'');return;}
+  const repo=await r.json();
+  const canPush=!!(repo.permissions&&repo.permissions.push);
+  dSet(s,repo.default_branch!==GITHUB_BRANCH?'warn':'ok',`Dépôt trouvé · ${repo.private?'privé':'public'} · branche par défaut <code>${esc(repo.default_branch)}</code>`,
+    repo.default_branch!==GITHUB_BRANCH?`La branche par défaut du dépôt est <code>${esc(repo.default_branch)}</code> alors que l'application écrit sur <code>${GITHUB_BRANCH}</code>. Ce n'est pas bloquant si <code>${GITHUB_BRANCH}</code> existe, mais GitHub Pages publie sans doute depuis l'autre branche.`:'');
+
+  /* --- 5. Droit d'écriture --- */
+  s=dStep('Droit d\'écriture');
+  dSet(s,canPush?'ok':'ko',
+    canPush?'Le token dispose de la permission d\'écriture (<code>push</code>) sur ce dépôt.':'Le token est en <strong>lecture seule</strong> sur ce dépôt.',
+    canPush?'':(fine?'Ouvrez le token sur GitHub → <em>Repository permissions</em> → <strong>Contents : Read and write</strong>. La permission « Read-only » suffit à lire, mais pas à sauvegarder.':'Le token classique doit avoir la portée <code>repo</code> cochée en entier (et non <code>public_repo</code> seul si le dépôt est privé).'));
+
+  /* --- 6. Branche --- */
+  s=dStep('Branche cible');
+  r=await fetch(`${repoUrl}/branches/${GITHUB_BRANCH}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+  if(r.status===404){
+    dSet(s,'ko',`La branche <code>${GITHUB_BRANCH}</code> n'existe pas dans ce dépôt.`,
+      `Le dépôt utilise <code>${esc(repo.default_branch)}</code>. Modifiez <code>GITHUB_BRANCH</code> en tête du fichier, ou créez la branche <code>${GITHUB_BRANCH}</code>.`);
+  }else if(r.ok){
+    const br=await r.json();
+    dSet(s,'ok',`Branche <code>${GITHUB_BRANCH}</code> présente · dernier commit <code>${esc((br.commit&&br.commit.sha||'').slice(0,7))}</code>`);
+  }else dSet(s,'warn',`Réponse <code>HTTP ${r.status}</code>.`);
+
+  /* --- 7. Fichier de données --- */
+  s=dStep('Fichier de données');
+  r=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+  if(r.status===404){
+    dSet(s,'warn',`<code>${DATA_FILE}</code> n'existe pas encore sur la branche <code>${GITHUB_BRANCH}</code>.`,
+      'Ce n\'est pas une erreur : le fichier sera créé à la première sauvegarde. Si vous aviez déjà des thés en ligne, vérifiez plutôt le nom du fichier ou la branche.');
+  }else if(r.ok){
+    const f=await r.json();
+    let n='?';
+    try{ const parsed=JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\n/g,''))))); n=Array.isArray(parsed)?parsed.length:'?'; }catch(e){}
+    dSet(s,'ok',`<code>${DATA_FILE}</code> lu · ${(f.size/1024).toFixed(1)} Ko · ${n} thé(s) en ligne · sha <code>${esc(String(f.sha).slice(0,7))}</code>`);
+  }else dSet(s,'ko',`Réponse <code>HTTP ${r.status}</code> à la lecture du fichier.`);
+
+  /* --- 8. Lecture publique (GitHub Pages) --- */
+  s=dStep('Lecture sans token (page publiée)');
+  try{
+    const rp=await fetch(DATA_FILE+'?v='+Date.now(),{cache:'no-store'});
+    if(rp.ok){
+      const j=await rp.json();
+      dSet(s,'ok',`<code>${DATA_FILE}</code> servi par la page · ${Array.isArray(j)?j.length:'?'} thé(s). Le chargement fonctionne même sans token.`);
+    }else dSet(s,'warn',`La page ne sert pas <code>${DATA_FILE}</code> (<code>HTTP ${rp.status}</code>).`,'Sur GitHub Pages, la publication prend parfois une minute après un commit. Si l\'erreur persiste, vérifiez que Pages publie bien la branche et le dossier qui contiennent ce fichier.');
+  }catch(e){
+    dSet(s,'warn','Fichier local inaccessible depuis la page.',proto==='file:'?'Attendu en <code>file://</code>.':'L\'application se rabattra sur les données du navigateur.');
+  }
+
+  /* --- 9. État local --- */
+  s=dStep('État local');
+  const pend=localStorage.getItem('teas_dirty');
+  let sz=0;try{sz=(localStorage.getItem('teas_data')||'').length;}catch(e){}
+  dSet(s,pend?'warn':'ok',
+    `${TEAS.length} thé(s) en mémoire · ${(sz/1024).toFixed(1)} Ko dans ce navigateur · ${pend?'<strong>modifications en attente de synchronisation</strong>':'tout est synchronisé'}`,
+    pend?'Des changements locaux n\'ont pas été poussés. Une fois le diagnostic vert, faites une modification (ou le test d\'écriture ci-dessous) pour relancer l\'envoi.':'');
+
+  /* --- Verdict --- */
+  const ko=_diagSteps.filter(x=>x.state==='ko').length;
+  const wn=_diagSteps.filter(x=>x.state==='warn').length;
+  const v=dStep(ko?'Verdict : la sauvegarde ne peut pas fonctionner':wn?'Verdict : fonctionnel, avec des réserves':'Verdict : tout est bon');
+  dSet(v,ko?'ko':wn?'warn':'ok',
+    ko?`${ko} blocage(s) à corriger — voir les lignes rouges ci-dessus.`
+      :wn?`Aucun blocage, ${wn} point(s) d'attention.`
+      :'Token valide, dépôt accessible en écriture, fichier lisible. La synchronisation devrait fonctionner.');
+}
+
+async function diagWriteTest(){
+  if(_diagBusy)return;
+  const t=(localStorage.getItem('gh_token')||'').trim();
+  if(!t){showToast('Aucun token enregistré.',true);return;}
+  if(!confirm('Le test réécrit le fichier avec un contenu identique. Aucun thé n\'est modifié. Continuer ?'))return;
+  _diagBusy=true;
+  const s=dStep('Test d\'écriture réel');
+  try{
+    const r=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+    let sha,content;
+    if(r.status===200){
+      const f=await r.json();sha=f.sha;
+      content=f.content.replace(/\n/g,''); /* on renvoie l'existant à l'identique */
+    }else if(r.status===404){
+      content=toB64(JSON.stringify(TEAS,null,1));
+    }else throw new Error('lecture impossible, HTTP '+r.status);
+    const body={message:'test: vérification du droit d\'écriture',content,branch:GITHUB_BRANCH};
+    if(sha)body.sha=sha;
+    const p=await fetch(apiUrl,{method:'PUT',headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(p.ok){
+      dSet(s,'ok','Écriture acceptée par GitHub.',sha?'Le contenu était identique : GitHub n\'a créé aucun commit. Le droit d\'écriture est confirmé.':'Le fichier a été créé avec la collection actuelle.');
+    }else if(p.status===403){
+      dSet(s,'ko','<code>403</code> — écriture refusée.','Le token peut lire mais pas écrire. Passez la permission <strong>Contents</strong> sur <em>Read and write</em>, puis relancez le diagnostic.');
+    }else if(p.status===409||p.status===422){
+      dSet(s,'warn',`<code>${p.status}</code> — conflit de version.`,'Le fichier a changé entre-temps. Relancez : l\'application gère ce cas automatiquement lors des vraies sauvegardes.');
+    }else{
+      let msg='';try{msg=(await p.json()).message||'';}catch(e){}
+      dSet(s,'ko',`Écriture refusée (<code>HTTP ${p.status}</code>).`,esc(msg));
+    }
+  }catch(e){
+    dSet(s,'ko','Échec du test.',esc(e.message||String(e)));
+  }finally{_diagBusy=false;}
+}
+
+function copyDiag(){
+  if(!_diagSteps.length){showToast('Lancez d\'abord le diagnostic.',true);return;}
+  const strip=h=>String(h||'').replace(/<[^>]*>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").trim();
+  const txt=['Diagnostic GitHub — '+new Date().toLocaleString('fr-FR'),
+    `Cible : ${GITHUB_OWNER}/${GITHUB_REPO}@${GITHUB_BRANCH}/${DATA_FILE}`,'']
+    .concat(_diagSteps.map(s=>`[${({ok:'OK',ko:'ÉCHEC',warn:'ATTENTION',run:'…',info:'-'}[s.state])}] ${s.label}\n    ${strip(s.detail)}${s.fix?'\n    → '+strip(s.fix):''}`)).join('\n');
+  const done=()=>showToast('Rapport copié ✓');
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));
+  else fallbackCopy(txt,done);
+}
+function fallbackCopy(txt,done){
+  const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){showToast('Copie impossible.',true);}finally{ta.remove();}
+}
+
 /* ============ THÈME ============ */
 function applyTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('theme',t);const b=document.getElementById('btn-theme');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
 function toggleTheme(){applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');}
 
 /* ============ NAVIGATION ============ */
-function switchTab(tab){['collection','racheter','souhait','stats'].forEach(t=>{document.getElementById('view-'+t).style.display=t===tab?'':'none';document.getElementById('tab-'+t).classList.toggle('active',t===tab);});if(tab==='stats')renderStats();if(tab==='racheter')renderRacheter();if(tab==='souhait')renderSouhait();}
+function switchTab(tab){['collection','racheter','souhait','stats','etiquettes'].forEach(t=>{document.getElementById('view-'+t).style.display=t===tab?'':'none';document.getElementById('tab-'+t).classList.toggle('active',t===tab);});if(tab==='stats')renderStats();if(tab==='racheter')renderRacheter();if(tab==='souhait')renderSouhait();if(tab==='etiquettes')renderLabPicker();}
 function switchModalTab(tab){['infos','infusion','degustations','historique'].forEach(t=>{document.getElementById('mpanel-'+t).style.display=t===tab?'':'none';document.getElementById('mtab-'+t).classList.toggle('active',t===tab);});}
 
 function sortBy(f){
@@ -726,7 +1127,7 @@ function teaRow(t){
   const prixHtml=t.prix?`<div class="prix-cell"><div class="prix-100">${parseFloat(t.prix).toFixed(2)} €/100g</div><div class="prix-kg">${(parseFloat(t.prix)*10).toFixed(2)} €/kg</div></div>`:'—';
   const subcat=t.subcategory?` <em style="font-size:11px;font-weight:400;color:var(--ink-light)">${esc(t.subcategory)}</em>`:'';
   const typeTip=`<span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span>${subcat}`;
-  const badges=(t.bio?'<span title="Bio" style="font-size:13px">🌿</span>':'')+(t.sauvage?'<span title="Sauvage" style="font-size:13px">🌲</span>':'');
+  const badges=(t.bio?'<span class="bio-sq" title="Agriculture biologique">bio</span>':'')+(t.sauvage?'<span title="Sauvage" style="font-size:13px">🌲</span>':'');
   const st=t.statut||'en-stock';
   const statutBtns=`<div class="statut-btns" onclick="event.stopPropagation()">
     <button class="statut-btn s-en-stock${st==='en-stock'?'':' inactive'}" onclick="setStatut('${esc(t.id)}','en-stock')" title="En stock" aria-label="En stock">✓</button>
@@ -989,6 +1390,187 @@ function renderStats(){
   document.querySelector('#table-fournisseurs tbody').innerHTML=Object.entries(byF).sort((a,b)=>b[1].count-a[1].count).map(([f,d])=>{const avg=d.notes.length?(d.notes.reduce((s,v)=>s+v,0)/d.notes.length).toFixed(1)+'/20':'—';const u=safeUrl(d.url);const link=u?`<a href="${u}" target="_blank" rel="noopener">🔗</a>`:'—';return`<tr><td>${esc(f)}</td><td>${link}</td><td>${d.count}</td><td>${avg}</td><td>${d.valeurStock>0?d.valeurStock.toFixed(2)+' €':'—'}</td></tr>`;}).join('')||'<tr><td colspan="5" style="color:var(--ink-light);font-style:italic">Aucun fournisseur.</td></tr>';
 }
 
+/* ============================================================
+   ÉTIQUETTES
+   Sceau et glose déduits de la famille ; la glose saisie
+   (champs `gloss` / `glossIt`) prime toujours si elle existe.
+   ============================================================ */
+const LAB_FAMILY={
+  'vert'    :{seal:'綠',label:'Thé vert',  roman:'lǜchá · 綠茶',  it:'« thé vert »'},
+  'noir'    :{seal:'紅',label:'Thé noir',  roman:'hóngchá · 紅茶',it:'« thé rouge »'},
+  'oolong'  :{seal:'烏',label:'Oolong',    roman:'wūlóng · 烏龍',  it:'« dragon noir »'},
+  'blanc'   :{seal:'白',label:'Thé blanc', roman:'báichá · 白茶',  it:'« thé blanc »'},
+  'pu-erh'  :{seal:'陳',label:'Pu-erh',    roman:'hēichá · 黑茶',  it:'« thé sombre, vieilli »'},
+  'matcha'  :{seal:'抹',label:'Matcha',    roman:'matcha · 抹茶',  it:'« thé broyé »'},
+  'infusion':{seal:'草',label:'Infusion',  roman:'',              it:''},
+  'autre'   :{seal:'',  label:'Autre',     roman:'',              it:''}
+};
+
+let _labSel={},_labFonts=false;
+
+function loadLabFonts(){
+  if(_labFonts)return;_labFonts=true;
+  const add=href=>{const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);};
+  add('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap');
+  add('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&text=%E8%8C%B6%E7%B6%A0%E7%B4%85%E7%83%8F%E9%BE%8D%E7%99%BD%E9%99%B3%E9%BB%91%E6%8A%B9%E8%8D%89%E6%99%AE%E6%B4%B1&display=swap');
+}
+
+function labPool(){
+  const q=(document.getElementById('lab-search').value||'').toLowerCase();
+  const st=document.getElementById('lab-statut').value;
+  return TEAS.filter(t=>{
+    if(t.statut==='souhait')return false;
+    if(st&&(t.statut||'en-stock')!==st)return false;
+    if(q&&!t.nom.toLowerCase().includes(q)&&!(t.origine||'').toLowerCase().includes(q)&&!(t.fournisseur||'').toLowerCase().includes(q))return false;
+    return true;
+  }).sort((a,b)=>a.nom.localeCompare(b.nom,'fr'));
+}
+
+function renderLabPicker(){
+  loadLabFonts();
+  const pool=labPool(),el=document.getElementById('lab-picker');
+  document.getElementById('lab-count').textContent=pool.length+' thé'+(pool.length!==1?'s':'');
+  if(!pool.length){el.innerHTML='<p class="lab-empty">Aucun thé ne correspond à ce filtre.</p>';renderLabSummary();return;}
+  el.innerHTML=pool.map(t=>{
+    const n=_labSel[t.id]||0,f=LAB_FAMILY[t.type]||LAB_FAMILY.autre;
+    return `<div class="lab-row" onclick="labToggle('${esc(t.id)}',event)">
+      <input type="checkbox" ${n?'checked':''} onclick="event.stopPropagation();labToggle('${esc(t.id)}')" aria-label="Sélectionner ${esc(t.nom)}" />
+      <div class="lab-row-main">
+        <div class="lab-row-name">${esc(t.nom)}</div>
+        <div class="lab-row-sub"><span class="type-badge tb-${esc(t.type)}">${esc(f.label)}</span>${t.bio?'<span class="bio-sq sm">bio</span>':''}${t.origine?'<span>'+esc(t.origine)+'</span>':''}</div>
+      </div>
+      <div class="lab-qty" onclick="event.stopPropagation()">
+        <button onclick="labQty('${esc(t.id)}',-1)" aria-label="Moins">−</button>
+        <span>${n}</span>
+        <button onclick="labQty('${esc(t.id)}',1)" aria-label="Plus">+</button>
+      </div>
+    </div>`;
+  }).join('');
+  renderLabSummary();
+}
+
+function labToggle(id,ev){
+  if(ev&&ev.target&&ev.target.tagName==='INPUT')return;
+  _labSel[id]=_labSel[id]?0:1;
+  if(!_labSel[id])delete _labSel[id];
+  renderLabPicker();
+}
+function labQty(id,d){
+  const n=Math.max(0,Math.min(16,(_labSel[id]||0)+d));
+  if(n)_labSel[id]=n;else delete _labSel[id];
+  renderLabPicker();
+}
+function labSelectAll(on){
+  if(on)labPool().forEach(t=>{if(!_labSel[t.id])_labSel[t.id]=1;});
+  else _labSel={};
+  renderLabPicker();
+}
+
+function labSelected(){
+  return TEAS.filter(t=>_labSel[t.id]>0).sort((a,b)=>a.nom.localeCompare(b.nom,'fr'));
+}
+function labTotal(){return Object.values(_labSel).reduce((s,n)=>s+n,0);}
+
+function renderLabSummary(){
+  const total=labTotal();
+  const off=Math.max(0,Math.min(7,(parseInt(document.getElementById('lab-offset').value,10)||1)-1));
+  const sheets=total?Math.ceil((total+off)/8):0;
+  document.getElementById('lab-summary').innerHTML=total
+    ? `<strong>${total}</strong> étiquette${total>1?'s':''} · <strong>${sheets}</strong> planche${sheets>1?'s':''} A4${off?` · démarrage à la pose ${off+1}`:''}<br><span style="color:var(--ink-light)">Dernière planche : ${((total+off)%8)||8} pose(s) utilisée(s).</span>`
+    : '<span style="color:var(--ink-light)">Sélectionnez au moins un thé.</span>';
+  renderLabPreview();
+}
+
+/* --- Construction d'une étiquette --- */
+function fmtDuree(sec){
+  const s=parseInt(sec,10);if(isNaN(s)||s<=0)return '';
+  if(s<60)return s+' s';
+  const m=Math.floor(s/60),r=s%60;
+  return m+' min'+(r?' '+r:'');
+}
+function labGloss(t,useFamily){
+  if(t.gloss||t.glossIt)return{line:t.gloss||'',it:t.glossIt||''};
+  if(t.subcategory)return{line:t.subcategory,it:(t.tags||[]).slice(0,2).join(' · ')};
+  if(useFamily){const f=LAB_FAMILY[t.type]||LAB_FAMILY.autre;if(f.roman)return{line:f.roman,it:f.it};}
+  return{line:'',it:''};
+}
+function labelHTML(t,opts){
+  const f=LAB_FAMILY[t.type]||LAB_FAMILY.autre;
+  const glyph=f.seal||(t.nom||'?').trim().charAt(0).toUpperCase();
+  const mono=!f.seal;
+  const g=labGloss(t,opts.family);
+  const inf=t.infusion||{};
+  const brew=[];
+  if(inf.qte)brew.push(esc(inf.qte)+' g/L');
+  if(inf.temp)brew.push(esc(inf.temp)+' °C');
+  if(fmtDuree(inf.duree))brew.push(fmtDuree(inf.duree));
+  const nl=(t.nom||'').length;
+  const size=nl>30?5.2:nl>24?6:nl>18?7:nl>13?8.2:9.4;
+  const bio=opts.bio&&t.bio;
+  return `<div class="lab${bio?' has-bio':''}${opts.shadow?' shadow':''}">
+    ${bio?'<div class="lab-bio">bio</div>':''}
+    <div class="lab-top">
+      <div class="lab-seal${mono?' mono':''}">${esc(glyph)}</div>
+      <div class="lab-head">
+        <div class="lab-name" style="font-size:${size}mm">${esc(t.nom)}</div>
+        ${(g.line||g.it)?`<div class="lab-gloss">${esc(g.line)}${g.it?` <em>${esc(g.it)}</em>`:''}</div>`:''}
+      </div>
+    </div>
+    <div class="lab-foot">
+      <div class="lab-brew">${brew.join(' <i>·</i> ')}</div>
+      <div class="lab-rule"></div>
+      <dl class="lab-meta">
+        <div><dt>Maison</dt><dd>${esc(t.fournisseur)||'—'}</dd></div>
+        <div><dt>Origine</dt><dd>${esc(t.origine)||'—'}</dd></div>
+        <div><dt>Famille</dt><dd>${esc(f.label)}</dd></div>
+      </dl>
+    </div>
+  </div>`;
+}
+function labOpts(){
+  return{
+    family:document.getElementById('lab-family').checked,
+    bio:document.getElementById('lab-biomark').checked,
+    marks:document.getElementById('lab-marks').checked
+  };
+}
+
+function renderLabPreview(){
+  const wrap=document.getElementById('lab-preview-wrap'),inner=document.getElementById('lab-preview');
+  const sel=labSelected(),o=labOpts();o.shadow=true;
+  if(!sel.length){
+    inner.style.transform='';inner.innerHTML='<p class="lab-empty">L\'aperçu apparaîtra ici.</p>';wrap.style.height='';return;
+  }
+  inner.innerHTML=sel.map(t=>labelHTML(t,o)).join('');
+  /* mise à l'échelle pour tenir dans la colonne (105 mm ≈ 397 px) */
+  const labelPx=105*96/25.4;
+  const s=Math.max(.1,Math.min(1,(wrap.clientWidth-2)/labelPx));
+  inner.style.transform=`scale(${s})`;
+  inner.style.width=labelPx+'px';
+  wrap.style.height=(inner.scrollHeight*s)+'px';
+}
+
+function buildSheets(){
+  const o=labOpts();o.shadow=false;
+  const off=Math.max(0,Math.min(7,(parseInt(document.getElementById('lab-offset').value,10)||1)-1));
+  const cells=[];
+  for(let i=0;i<off;i++)cells.push('');
+  labSelected().forEach(t=>{const h=labelHTML(t,o);for(let i=0;i<_labSel[t.id];i++)cells.push(h);});
+  while(cells.length%8)cells.push('');
+  let out='';
+  for(let i=0;i<cells.length;i+=8){
+    out+=`<div class="sheet${o.marks?' marks':''}">`+cells.slice(i,i+8).map(c=>`<div class="cell">${c}</div>`).join('')+'</div>';
+  }
+  document.getElementById('label-sheets').innerHTML=out;
+}
+
+function printLabels(){
+  if(!labTotal()){showToast('Sélectionnez au moins un thé.',true);return;}
+  loadLabFonts();
+  buildSheets();
+  setTimeout(()=>window.print(),260);
+}
+
 /* ============ EXPORT / IMPORT ============ */
 const CSV_H=['nom','type','origine','statut','fournisseur','prix','note','commentaire','bio','sauvage','stock','url','subcategory','dateAchat'];
 function teasToCSV(){return[CSV_H.join(','),...TEAS.map(t=>CSV_H.map(h=>`"${(t[h]===undefined||t[h]===null?'':String(t[h])).replace(/"/g,'""')}"`).join(','))].join('\n');}
@@ -1079,6 +1661,12 @@ async function init(){
   renderAll();
 }
 document.addEventListener('DOMContentLoaded',init);
+
+let _rsz;
+window.addEventListener('resize',()=>{
+  clearTimeout(_rsz);
+  _rsz=setTimeout(()=>{if(document.getElementById('view-etiquettes').style.display!=='none')renderLabPreview();},180);
+});
 
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   navigator.serviceWorker.register('sw.js').catch(()=>{});
