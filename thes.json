@@ -1,1 +1,30 @@
-[]
+[
+ {
+  "id": "msoc0s7ya8gwwee174w",
+  "nom": "test",
+  "type": "vert",
+  "subcategory": "",
+  "origine": "",
+  "statut": "en-stock",
+  "fournisseur": "",
+  "url": "",
+  "prix": "",
+  "stock": "",
+  "dateAchat": "",
+  "note": "",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
+ }
+]
