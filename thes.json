@@ -26,5 +26,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msod53q8fc7dyek091e",
+  "nom": "Chinois Rouge",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Yunnan, Chine",
+  "statut": "en-stock",
+  "fournisseur": "Kancha",
+  "url": "",
+  "prix": "18",
+  "stock": "100",
+  "dateAchat": "",
+  "note": "17",
+  "commentaire": "",
+  "bio": true,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
