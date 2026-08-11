@@ -83,9 +83,24 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .strip-pu-erh{border-left-color:#7a4a3a!important;}.strip-matcha{border-left-color:#8aab6f!important;}
 .strip-infusion{border-left-color:#d4a0b0!important;}.strip-autre{border-left-color:#a0a090!important;}
 .strip-souhait{border-left-color:#7a5a9a!important;}
-.stars-row{display:inline-flex;gap:1px;align-items:center;vertical-align:middle;}
-.star{font-size:12px;line-height:1;}.star.full{color:var(--accent);}.star.half{color:var(--accent);opacity:.55;}.star.empty{color:var(--star-empty);}
-.note-num{font-size:11px;color:var(--ink-light);margin-left:3px;white-space:nowrap;}
+/* ===== Note : chiffre + jauge, palier de couleur ===== */
+.score{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;vertical-align:middle;
+       --sc:var(--ink-light);}
+.score.t1{--sc:#9a9086;}
+.score.t2{--sc:var(--ink-light);}
+.score.t3{--sc:var(--tea-green);}
+.score.t4{--sc:var(--oolong);}
+.score.t5{--sc:#a8790f;}
+[data-theme="dark"] .score.t3{--sc:#8bab77;}
+[data-theme="dark"] .score.t5{--sc:#dcb44e;}
+.score-val{font-family:'Shippori Mincho',serif;font-size:14.5px;font-weight:600;line-height:1;
+           font-variant-numeric:tabular-nums;color:var(--sc);letter-spacing:-.01em;}
+.score-max{font-family:'Zen Kaku Gothic New',sans-serif;font-size:9.5px;font-weight:400;color:var(--ink-light);margin-left:1px;}
+.score-gauge{width:36px;height:3px;background:var(--star-empty);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.score-gauge i{display:block;height:100%;border-radius:2px;background:var(--sc);}
+.score-none{color:var(--star-empty);font-size:13px;}
+.score.lg .score-val{font-size:22px;}
+.score.lg .score-gauge{width:52px;height:4px;}
 .prix-cell{white-space:nowrap;}.prix-100{font-weight:500;}.prix-kg{font-size:11px;color:var(--ink-light);}
 .badges-cell{display:flex;gap:2px;align-items:center;}
 .stock-cell{white-space:nowrap;font-size:12px;}.stock-low{color:var(--danger);font-weight:600;}.stock-ok{color:var(--tea-green);}
@@ -136,14 +151,33 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .toggle-btn:hover{border-color:var(--tea-green);color:var(--tea-green);}
 .toggle-btn.active-bio{background:#e8f0e0;border-color:var(--tea-green);color:#3d6028;font-weight:600;}
 .toggle-btn.active-sauvage{background:#f0e8d8;border-color:#8a6030;color:#8a6030;font-weight:600;}
-.note-widget{display:flex;flex-direction:column;gap:6px;}
-.note-input-row{display:flex;align-items:center;gap:7px;}
-.note-input-row input[type="number"]{width:60px;text-align:center;font-size:14px;font-weight:600;padding:4px;}
-.stars-interactive{display:flex;gap:2px;flex-wrap:wrap;}
-.si{cursor:pointer;transition:color .12s,transform .1s;color:var(--star-empty);font-size:20px;line-height:1;user-select:none;}
-.si:hover,.si.active{color:var(--accent);}.si:hover{transform:scale(1.2);}
-.si-half{font-size:14px;opacity:.8;}
-.note-label{font-size:11px;color:var(--ink-light);font-style:italic;}
+.note-widget{display:flex;flex-direction:column;gap:8px;}
+.note-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.note-num-input{width:82px!important;font-family:'Shippori Mincho',serif!important;font-size:24px!important;font-weight:600;
+                text-align:center;padding:4px 6px!important;font-variant-numeric:tabular-nums;color:var(--nc,var(--ink))!important;}
+.note-num-input::-webkit-outer-spin-button,.note-num-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.note-num-input{-moz-appearance:textfield;}
+.note-over{font-size:11px;color:var(--ink-light);}
+.note-label{font-size:12px;font-style:italic;color:var(--nc,var(--ink-light));font-weight:500;margin-right:auto;}
+.note-clear{background:none;border:none;color:var(--ink-light);font-size:11px;cursor:pointer;text-decoration:underline;padding:2px 4px;font-family:'Zen Kaku Gothic New',sans-serif;}
+.note-clear:hover{color:var(--danger);}
+.note-range{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer;margin:0;}
+.note-range::-webkit-slider-runnable-track{height:4px;border-radius:3px;
+  background:linear-gradient(var(--nc,var(--tea-green)),var(--nc,var(--tea-green))) left/var(--fill,0%) 100% no-repeat,var(--star-empty);}
+.note-range::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;margin-top:-7.5px;border-radius:50%;
+  background:var(--nc,var(--tea-green));border:2px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.28);}
+.note-range::-moz-range-track{height:4px;border-radius:3px;background:var(--star-empty);}
+.note-range::-moz-range-progress{height:4px;border-radius:3px;background:var(--nc,var(--tea-green));}
+.note-range::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--nc,var(--tea-green));
+  border:2px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.28);}
+.note-range:focus{outline:none;}
+.note-scale{display:flex;justify-content:space-between;font-size:9.5px;color:var(--ink-light);letter-spacing:.06em;margin-top:-4px;}
+/* variante fond sombre (mode dégustation) */
+.note-range.dark::-webkit-slider-runnable-track{background:linear-gradient(var(--accent),var(--accent)) left/var(--fill,0%) 100% no-repeat,rgba(245,240,232,.22);}
+.note-range.dark::-webkit-slider-thumb{background:var(--accent);border-color:#1a1611;}
+.note-range.dark::-moz-range-track{background:rgba(245,240,232,.22);}
+.note-range.dark::-moz-range-progress{background:var(--accent);}
+.note-range.dark::-moz-range-thumb{background:var(--accent);border-color:#1a1611;}
 .infusion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:var(--panel);border-radius:3px;padding:10px;}
 .infusion-param label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-light);display:block;margin-bottom:3px;}
 .infusion-param input{width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:2px;font-size:13px;font-family:'Zen Kaku Gothic New',sans-serif;background:var(--card);color:var(--ink);}
@@ -582,13 +616,15 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
         </div>
         <div class="form-group">
           <label>Note /20</label>
-          <div class="note-widget">
-            <div class="note-input-row">
-              <input type="number" id="f-note" min="0" max="20" step="0.5" placeholder="—" oninput="syncStars()" />
-              <span style="font-size:12px;color:var(--ink-light)">/20</span>
+          <div class="note-widget" id="note-widget">
+            <div class="note-head">
+              <input type="number" id="f-note" class="note-num-input" min="0" max="20" step="0.5" placeholder="—" oninput="syncStars()" aria-label="Note sur 20" />
+              <span class="note-over">/ 20</span>
+              <span class="note-label" id="note-label">Non noté</span>
+              <button type="button" class="note-clear" id="note-clear" onclick="clearNote()">Effacer</button>
             </div>
-            <div class="stars-interactive" id="stars-widget"></div>
-            <div class="note-label" id="note-label">Cliquez pour noter</div>
+            <input type="range" id="f-note-range" class="note-range" min="0" max="20" step="0.5" value="0" oninput="setNote(this.value)" aria-label="Curseur de note" />
+            <div class="note-scale"><span>0</span><span>5</span><span>10</span><span>15</span><span>20</span></div>
           </div>
         </div>
         <div class="form-group"><label>Commentaire</label><textarea id="f-commentaire" placeholder="Arômes, anecdotes…"></textarea></div>
@@ -664,8 +700,10 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
     </div>
     <div class="deg-mode-note">
       <div style="color:rgba(245,240,232,.6);font-size:11px;text-transform:uppercase;letter-spacing:.08em">Votre note</div>
-      <div class="stars-interactive" id="dm-stars" style="justify-content:center"></div>
-      <div style="color:#f5f0e8;font-size:1.3rem;font-family:'Shippori Mincho',serif;" id="dm-note-val">—</div>
+      <div style="color:#f5f0e8;font-size:2.6rem;font-family:'Shippori Mincho',serif;line-height:1;font-variant-numeric:tabular-nums;" id="dm-note-val">—</div>
+      <div style="color:var(--accent);font-size:.85rem;font-style:italic;min-height:1.2em" id="dm-note-label"></div>
+      <input type="range" id="dm-range" class="note-range dark" min="0" max="20" step="0.5" value="0" oninput="setDmNote(this.value)" aria-label="Note sur 20" style="max-width:420px" />
+      <div class="note-scale" style="width:100%;max-width:420px;color:rgba(245,240,232,.45)"><span>0</span><span>10</span><span>20</span></div>
     </div>
     <textarea class="deg-mode-comment" id="dm-comment" rows="2" placeholder="Vos impressions…"></textarea>
     <div style="display:flex;gap:12px;justify-content:center;">
@@ -727,6 +765,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
         <button class="btn btn-accent" id="diag-run" onclick="runDiag()">▶ Lancer le diagnostic</button>
         <button class="btn btn-ghost" id="diag-write" onclick="diagWriteTest()">✎ Test d'écriture réel</button>
+        <button class="btn btn-ghost" onclick="forcePush()">⟳ Forcer la synchronisation</button>
         <button class="btn btn-ghost" onclick="copyDiag()">⧉ Copier le rapport</button>
       </div>
       <div id="diag-out" class="diag-out"><p class="diag-idle">Aucun diagnostic lancé.</p></div>
@@ -783,10 +822,44 @@ async function loadData(){
 }
 
 /* ============ SYNC GITHUB (debounce + gestion conflits) ============ */
-let _pushTimer=null,_pushing=false,_dirtyAgain=false;
+let _pushTimer=null,_pushing=false,_dirtyAgain=false,_lastSha=null;
 const apiUrl=`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_FILE}`;
-const ghHeaders=()=>({Authorization:`Bearer ${getToken()}`,Accept:'application/vnd.github.v3+json'});
+const ghHeaders=()=>({Authorization:`Bearer ${getToken()}`,Accept:'application/vnd.github+json'});
 const toB64=s=>btoa(unescape(encodeURIComponent(s)));
+const fromB64=c=>{try{return JSON.parse(decodeURIComponent(escape(atob(String(c).replace(/\s/g,'')))));}catch(e){return null;}};
+
+/* Pierres tombales : ids supprimés localement.
+   Sans elles, une fusion après conflit ressusciterait les thés effacés. */
+const TOMB_KEY='teas_tombstones';
+function getTombs(){try{return JSON.parse(localStorage.getItem(TOMB_KEY)||'[]');}catch(e){return[];}}
+function addTombs(ids){
+  const s=new Set(getTombs());ids.filter(Boolean).forEach(i=>s.add(i));
+  try{localStorage.setItem(TOMB_KEY,JSON.stringify([...s].slice(-800)));}catch(e){}
+}
+
+/* Lecture des métadonnées du fichier distant.
+   `cache:'no-store'` + paramètre anti-cache : l'API GitHub renvoie
+   `Cache-Control: private, max-age=60`, donc sans cela le navigateur
+   resservait un sha périmé pendant une minute — d'où les faux conflits. */
+async function ghGetMeta(){
+  const r=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}&_=${Date.now()}`,{headers:ghHeaders(),cache:'no-store'});
+  if(r.status===200)return await r.json();
+  if(r.status===404)return null;
+  if(r.status===401)throw new Error('token invalide ou expiré');
+  if(r.status===403)throw new Error('accès refusé (permissions ou quota)');
+  throw new Error('HTTP '+r.status+' à la lecture');
+}
+
+/* Récupère les thés présents en ligne mais absents ici et non supprimés. */
+function mergeRemoteInto(meta){
+  if(!meta||!meta.content)return 0;
+  const rem=fromB64(meta.content);
+  if(!Array.isArray(rem))return 0;
+  const have=new Set(TEAS.map(t=>t.id)),tomb=new Set(getTombs());
+  const add=rem.filter(t=>t&&t.id&&!have.has(t.id)&&!tomb.has(t.id));
+  if(add.length){TEAS=TEAS.concat(add);saveLocal();renderAll();}
+  return add.length;
+}
 
 function schedulePush(){
   if(!getToken())return;
@@ -798,9 +871,9 @@ async function doPush(){
   if(_pushing){_dirtyAgain=true;return;}
   _pushing=true;setSaving(true);
   try{
-    await pushOnce(true);
+    const merged=await pushOnce();
     localStorage.removeItem('teas_dirty');
-    showToast('Sauvegardé sur GitHub ✓');
+    showToast(merged?`Sauvegardé sur GitHub ✓ (${merged} thé(s) récupéré(s) depuis un autre appareil)`:'Sauvegardé sur GitHub ✓');
   }catch(e){
     console.error(e);
     showToast('Erreur GitHub ('+(e.message||'réseau')+') — sauvegardé en local, nouvel essai à la prochaine modification',true);
@@ -809,23 +882,39 @@ async function doPush(){
     if(_dirtyAgain){_dirtyAgain=false;schedulePush();}
   }
 }
-async function pushOnce(canRetry){
-  let sha;
-  const r=await fetch(apiUrl+'?ref='+GITHUB_BRANCH,{headers:ghHeaders()});
-  if(r.status===200){sha=(await r.json()).sha;}
-  else if(r.status===404){sha=undefined;}
-  else if(r.status===401||r.status===403){throw new Error('token invalide ou permissions insuffisantes');}
-  else{throw new Error('HTTP '+r.status);}
-  const body={message:'maj: collection de thés',content:toB64(JSON.stringify(TEAS,null,1)),branch:GITHUB_BRANCH};
-  if(sha)body.sha=sha;
-  const p=await fetch(apiUrl,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(p.status===409||p.status===422){
-    if(canRetry)return pushOnce(false);
-    throw new Error('conflit de version');
+
+/* Quatre tentatives espacées. À chaque échec de sha, on relit le fichier,
+   on récupère ce qui a été ajouté ailleurs, puis on réécrit. */
+async function pushOnce(){
+  const delays=[0,600,1500,3000];
+  let merged=0,lastErr=null;
+  for(let a=0;a<delays.length;a++){
+    if(delays[a])await new Promise(r=>setTimeout(r,delays[a]));
+    const meta=await ghGetMeta();
+    if(a>0)merged+=mergeRemoteInto(meta);
+    const body={message:'maj: collection de thés',content:toB64(JSON.stringify(TEAS,null,1)),branch:GITHUB_BRANCH};
+    if(meta&&meta.sha)body.sha=meta.sha;
+    const p=await fetch(apiUrl,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});
+    if(p.ok){
+      try{const j=await p.json();_lastSha=(j&&j.content&&j.content.sha)||null;}catch(e){_lastSha=null;}
+      return merged;
+    }
+    if(p.status===409||p.status===422){lastErr=new Error('conflit de version');continue;}
+    if(p.status===401)throw new Error('token invalide ou expiré');
+    if(p.status===403)throw new Error('écriture refusée — le token est en lecture seule');
+    let m='';try{m=(await p.json()).message||'';}catch(e){}
+    throw new Error('HTTP '+p.status+(m?' — '+m:''));
   }
-  if(!p.ok)throw new Error('HTTP '+p.status);
+  throw lastErr||new Error('conflit de version persistant');
 }
 function setSaving(v){document.getElementById('saving-indicator').classList.toggle('visible',v);}
+
+/* Envoi immédiat, hors debounce (bouton du diagnostic). */
+async function forcePush(){
+  if(!getToken()){showToast('Aucun token enregistré.',true);return;}
+  clearTimeout(_pushTimer);
+  await doPush();
+}
 
 /* ============ TOKEN ============ */
 function toggleTokenBanner(){const b=document.getElementById('token-banner');b.classList.toggle('hidden');if(!b.classList.contains('hidden'))document.getElementById('token-input').value=getToken();}
@@ -983,7 +1072,22 @@ async function diagSequence(){
     dSet(s,'ok',`<code>${DATA_FILE}</code> lu · ${(f.size/1024).toFixed(1)} Ko · ${n} thé(s) en ligne · sha <code>${esc(String(f.sha).slice(0,7))}</code>`);
   }else dSet(s,'ko',`Réponse <code>HTTP ${r.status}</code> à la lecture du fichier.`);
 
-  /* --- 8. Lecture publique (GitHub Pages) --- */
+  /* --- 8. Fraîcheur du sha (cause classique des « conflits de version ») --- */
+  s=dStep('Fraîcheur des lectures');
+  try{
+    const a=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}&_=${Date.now()}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'},cache:'no-store'});
+    const b=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+    const ja=a.ok?await a.json():null,jb=b.ok?await b.json():null;
+    const cc=hdr(b,'cache-control');
+    if(ja&&jb&&ja.sha!==jb.sha){
+      dSet(s,'warn','Le navigateur a resservi une version périmée du fichier depuis son cache.',
+        'C\'est la cause habituelle du message « conflit de version ». Cette version de l\'application lit désormais le fichier en <code>no-store</code>, le problème ne devrait plus se produire.');
+    }else{
+      dSet(s,'ok',`Lecture fraîche confirmée${cc?` · l'API annonce <code>${esc(cc)}</code>, contourné par l'application`:''}.`);
+    }
+  }catch(e){dSet(s,'warn','Contrôle impossible.',esc(e.message||''));}
+
+  /* --- 9. Lecture publique (GitHub Pages) --- */
   s=dStep('Lecture sans token (page publiée)');
   try{
     const rp=await fetch(DATA_FILE+'?v='+Date.now(),{cache:'no-store'});
@@ -995,7 +1099,7 @@ async function diagSequence(){
     dSet(s,'warn','Fichier local inaccessible depuis la page.',proto==='file:'?'Attendu en <code>file://</code>.':'L\'application se rabattra sur les données du navigateur.');
   }
 
-  /* --- 9. État local --- */
+  /* --- 10. État local --- */
   s=dStep('État local');
   const pend=localStorage.getItem('teas_dirty');
   let sz=0;try{sz=(localStorage.getItem('teas_data')||'').length;}catch(e){}
@@ -1021,7 +1125,7 @@ async function diagWriteTest(){
   _diagBusy=true;
   const s=dStep('Test d\'écriture réel');
   try{
-    const r=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'}});
+    const r=await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}&_=${Date.now()}`,{headers:{Authorization:`Bearer ${t}`,Accept:'application/vnd.github+json'},cache:'no-store'});
     let sha,content;
     if(r.status===200){
       const f=await r.json();sha=f.sha;
@@ -1123,7 +1227,7 @@ function renderCollection(){
 }
 
 function teaRow(t){
-  const noteHtml=t.note?`${starsDisplay(t.note)}<span class="note-num">${parseFloat(t.note).toFixed(1)}/20</span>`:'<span style="color:var(--star-empty)">—</span>';
+  const noteHtml=scoreDisplay(t.note);
   const prixHtml=t.prix?`<div class="prix-cell"><div class="prix-100">${parseFloat(t.prix).toFixed(2)} €/100g</div><div class="prix-kg">${(parseFloat(t.prix)*10).toFixed(2)} €/kg</div></div>`:'—';
   const subcat=t.subcategory?` <em style="font-size:11px;font-weight:400;color:var(--ink-light)">${esc(t.subcategory)}</em>`:'';
   const typeTip=`<span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span>${subcat}`;
@@ -1166,7 +1270,7 @@ function renderRacheter(){
   tbody.innerHTML=teas.map(t=>{const u=safeUrl(t.url);return`<tr class="strip-${esc(t.type)}" onclick="openEditModal('${esc(t.id)}')">
     <td class="m-title" data-label=""><strong>${esc(t.nom)}</strong></td>
     <td data-label="Type"><span class="type-badge tb-${esc(t.type)}">${TYPE_ICONS[t.type]||'🫙'} ${esc(t.type)}</span></td>
-    <td data-label="Note" class="${t.note?'':'m-empty'}">${t.note?starsDisplay(t.note)+'<span class="note-num">'+parseFloat(t.note).toFixed(1)+'/20</span>':'—'}</td>
+    <td data-label="Note" class="${t.note?'':'m-empty'}">${scoreDisplay(t.note)}</td>
     <td data-label="Prix" class="${t.prix?'':'m-empty'}">${t.prix?parseFloat(t.prix).toFixed(2)+' €/100g':'—'}</td>
     <td data-label="Origine" class="${t.origine?'':'m-empty'}">${esc(t.origine)||'—'}</td>
     <td data-label="Fournisseur" class="${t.fournisseur?'':'m-empty'}">${esc(t.fournisseur)||'—'}</td>
@@ -1198,24 +1302,57 @@ function populateFilters(){
   if(dl)dl.innerHTML=[...new Set(TEAS.map(t=>t.fournisseur).filter(Boolean))].sort().map(f=>`<option value="${esc(f)}">`).join('');
 }
 
-/* ============ ÉTOILES ============ */
-function starsDisplay(note){const n=parseFloat(note),full=Math.floor(n/2),half=(n%2)>=1?1:0,empty=10-full-half;return`<span class="stars-row">${'<span class="star full">★</span>'.repeat(full)}${half?'<span class="star half">★</span>':''}${'<span class="star empty">☆</span>'.repeat(empty)}</span>`;}
-
-function buildStars(){
-  const w=document.getElementById('stars-widget');w.innerHTML='';
-  for(let i=1;i<=20;i++){const s=document.createElement('span');s.className='si'+(i%2!==0?' si-half':'');s.dataset.val=i;s.textContent=i%2===0?'★':'·';s.title=i+'/20';s.onclick=()=>setNote(i);s.onmouseover=()=>hlStars(i);s.onmouseout=()=>{const v=parseFloat(document.getElementById('f-note').value)||0;hlStars(v);};w.appendChild(s);}
+/* ============ NOTES ============
+   Un chiffre lisible, une jauge fine, un palier de couleur.
+   Le palier fait le tri visuel là où une jauge 0-20 écrase les écarts
+   (16 et 19 occupent 80 % et 95 % de la barre : indiscernables). */
+const noteTier=n=>n>=18?5:n>=16?4:n>=14?3:n>=10?2:1;
+function fmtNote(n){
+  const v=Math.round(parseFloat(n)*2)/2;
+  return v%1?v.toFixed(1).replace('.',','):String(v);
 }
-function setNote(v){document.getElementById('f-note').value=v;hlStars(v);updateNoteLabel(v);}
-function hlStars(v){document.querySelectorAll('#stars-widget .si').forEach(s=>s.classList.toggle('active',parseInt(s.dataset.val)<=v));}
-function syncStars(){const v=parseFloat(document.getElementById('f-note').value)||0;hlStars(v);updateNoteLabel(v);}
-function updateNoteLabel(v){document.getElementById('note-label').textContent=NOTE_LABELS[Math.round(v)]||'';}
-
-function buildDmStars(){
-  const w=document.getElementById('dm-stars');w.innerHTML='';
-  for(let i=1;i<=20;i++){const s=document.createElement('span');s.className='si'+(i%2!==0?' si-half':'');s.dataset.val=i;s.textContent=i%2===0?'★':'·';s.style.color='rgba(245,240,232,.25)';s.onclick=()=>setDmNote(i);s.onmouseover=()=>hlDmStars(i);s.onmouseout=()=>hlDmStars(_dmNote);w.appendChild(s);}
+function scoreDisplay(note,opt){
+  const n=parseFloat(note);
+  if(note===''||note===null||note===undefined||isNaN(n))return '<span class="score-none">—</span>';
+  const o=opt||{};
+  return `<span class="score t${noteTier(n)}${o.lg?' lg':''}" title="${fmtNote(n)} sur 20 — ${esc(NOTE_LABELS[Math.round(n)]||'')}">`
+    +`<span class="score-val">${fmtNote(n)}${o.max?'<span class="score-max">/20</span>':''}</span>`
+    +`<span class="score-gauge"><i style="width:${Math.max(4,Math.round(n/20*1000)/10)}%"></i></span></span>`;
 }
-function setDmNote(v){_dmNote=v;hlDmStars(v);document.getElementById('dm-note-val').textContent=NOTE_LABELS[Math.round(v)]||v+'/20';}
-function hlDmStars(v){document.querySelectorAll('#dm-stars .si').forEach(s=>{s.style.color=parseInt(s.dataset.val)<=v?'var(--accent)':'rgba(245,240,232,.25)';});}
+/* conservé : d'anciens appels peuvent subsister */
+const starsDisplay=note=>scoreDisplay(note);
+
+const TIER_COLOR=['','#9a9086','var(--ink-light)','var(--tea-green)','var(--oolong)','#a8790f'];
+
+/* --- Curseur du formulaire --- */
+function setNote(v){document.getElementById('f-note').value=v;syncStars();}
+function clearNote(){document.getElementById('f-note').value='';syncStars();}
+function syncStars(){
+  const raw=document.getElementById('f-note').value;
+  const has=raw!==''&&!isNaN(parseFloat(raw));
+  const v=has?Math.min(20,Math.max(0,parseFloat(raw))):0;
+  const w=document.getElementById('note-widget'),r=document.getElementById('f-note-range');
+  r.value=v;
+  const col=has?TIER_COLOR[noteTier(v)]:'var(--ink-light)';
+  w.style.setProperty('--nc',col);
+  w.style.setProperty('--fill',(v/20*100)+'%');
+  document.getElementById('note-label').textContent=has?(NOTE_LABELS[Math.round(v)]||''):'Non noté';
+  document.getElementById('note-clear').style.visibility=has?'visible':'hidden';
+}
+/* alias historique */
+const hlStars=v=>syncStars();
+const updateNoteLabel=v=>syncStars();
+
+/* --- Curseur du mode dégustation --- */
+function setDmNote(v){
+  _dmNote=parseFloat(v)||0;
+  const r=document.getElementById('dm-range');
+  r.value=_dmNote;
+  r.style.setProperty('--fill',(_dmNote/20*100)+'%');
+  document.getElementById('dm-note-val').textContent=_dmNote?fmtNote(_dmNote):'—';
+  document.getElementById('dm-note-label').textContent=_dmNote?(NOTE_LABELS[Math.round(_dmNote)]||''):'';
+}
+const hlDmStars=v=>setDmNote(v||0);
 
 /* ============ FORMULAIRE ============ */
 function updatePrixPrev(){const v=parseFloat(document.getElementById('f-prix').value);document.getElementById('prix-preview').textContent=(!isNaN(v)&&v>0)?`→ ${(v*10).toFixed(2)} €/kg`:'';}
@@ -1244,14 +1381,14 @@ function renderDegList(){
   const el=document.getElementById('deg-list');
   if(!_degs.length){el.innerHTML='<p style="font-size:12px;color:var(--ink-light);font-style:italic">Aucune dégustation enregistrée.</p>';}
   else{
-    el.innerHTML=_degs.slice().reverse().map((d,ri)=>{const i=_degs.length-1-ri;return`<div class="deg-item"><div class="deg-item-header"><span class="deg-date">📅 ${esc(d.date)||'—'}</span><span>${d.note?starsDisplay(d.note)+'<span class="note-num">'+parseFloat(d.note).toFixed(1)+'/20</span>':''}</span><button class="btn-deg-del" onclick="deleteDeg(${i})" aria-label="Supprimer">✕</button></div>${d.temp||d.duree?`<div class="deg-params">${d.temp?'🌡 '+esc(d.temp)+'°C':''}${d.temp&&d.duree?' · ':''}${d.duree?'⏱ '+esc(d.duree)+'s':''}</div>`:''}${d.comment?`<div class="deg-commentaire">${esc(d.comment)}</div>`:''}</div>`;}).join('');
+    el.innerHTML=_degs.slice().reverse().map((d,ri)=>{const i=_degs.length-1-ri;return`<div class="deg-item"><div class="deg-item-header"><span class="deg-date">📅 ${esc(d.date)||'—'}</span><span>${d.note?scoreDisplay(d.note):''}</span><button class="btn-deg-del" onclick="deleteDeg(${i})" aria-label="Supprimer">✕</button></div>${d.temp||d.duree?`<div class="deg-params">${d.temp?'🌡 '+esc(d.temp)+'°C':''}${d.temp&&d.duree?' · ':''}${d.duree?'⏱ '+esc(d.duree)+'s':''}</div>`:''}${d.comment?`<div class="deg-commentaire">${esc(d.comment)}</div>`:''}</div>`;}).join('');
   }
   const avgEl=document.getElementById('deg-avg');
   const avg=degAverage();
-  if(avg!==null){avgEl.style.display='';avgEl.innerHTML=`<span>Moyenne des dégustations : <strong>${avg.toFixed(1)}/20</strong></span><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px;" onclick="applyDegAverage()">→ Utiliser comme note</button>`;}
+  if(avg!==null){avgEl.style.display='';avgEl.innerHTML=`<span>Moyenne des dégustations : ${scoreDisplay(avg,{max:1})}</span><button class="btn btn-ghost" style="font-size:11px;padding:4px 8px;" onclick="applyDegAverage()">→ Utiliser comme note</button>`;}
   else{avgEl.style.display='none';avgEl.innerHTML='';}
 }
-function applyDegAverage(){const avg=degAverage();if(avg===null)return;document.getElementById('f-note').value=(Math.round(avg*2)/2).toFixed(1);syncStars();showToast('Note mise à jour depuis la moyenne des dégustations');}
+function applyDegAverage(){const avg=degAverage();if(avg===null)return;setNote(Math.round(avg*2)/2);showToast('Note mise à jour depuis la moyenne des dégustations');}
 function openNewDeg(){document.getElementById('new-deg-form').style.display='';document.getElementById('deg-date').value=new Date().toISOString().slice(0,10);}
 function cancelDeg(){document.getElementById('new-deg-form').style.display='none';}
 function saveDeg(){const d={date:document.getElementById('deg-date').value,temp:document.getElementById('deg-temp').value,duree:document.getElementById('deg-duree').value,note:document.getElementById('deg-note').value,comment:document.getElementById('deg-comment').value.trim()};_degs.push(d);renderDegList();cancelDeg();['deg-temp','deg-duree','deg-note','deg-comment'].forEach(id=>{document.getElementById(id).value='';});}
@@ -1276,8 +1413,7 @@ function openDegModeFor(id){
   document.getElementById('dm-duree').value=(t.infusion&&t.infusion.duree)||'';
   document.getElementById('dm-qte').value=(t.infusion&&t.infusion.qte)||'';
   document.getElementById('dm-comment').value='';
-  document.getElementById('dm-note-val').textContent='—';
-  hlDmStars(0);
+  setDmNote(0);
   document.getElementById('deg-mode-overlay').classList.add('open');
 }
 function openDegMode(){if(editingId)openDegModeFor(editingId);}
@@ -1301,7 +1437,7 @@ function openAddModal(){
   _bio=false;_sauvage=false;_statut='en-stock';_tags=[];_degs=[];_historique=[];
   document.getElementById('toggle-bio').classList.remove('active-bio');
   document.getElementById('toggle-sauvage').classList.remove('active-sauvage');
-  setModalStatut('en-stock');hlStars(0);document.getElementById('note-label').textContent='Cliquez pour noter';
+  setModalStatut('en-stock');syncStars();
   renderTagsWrap();renderDegList();renderHistoriqueList();
   populateFilters();switchModalTab('infos');
   setRO(false);openModal('modal-tea');
@@ -1326,7 +1462,7 @@ function openEditModal(id){
   _tags=[...(t.tags||[])];_degs=[...(t.degustations||[])];_historique=[...(t.historique||[])];
   document.getElementById('toggle-bio').classList.toggle('active-bio',_bio);
   document.getElementById('toggle-sauvage').classList.toggle('active-sauvage',_sauvage);
-  setModalStatut(_statut);const nv=parseFloat(t.note)||0;hlStars(nv);updateNoteLabel(nv);
+  setModalStatut(_statut);syncStars();
   renderTagsWrap();renderDegList();renderHistoriqueList();
   document.getElementById('btn-delete-tea').style.display=getToken()?'inline-block':'none';
   populateFilters();switchModalTab('infos');setRO(!getToken());openModal('modal-tea');
@@ -1357,7 +1493,7 @@ function saveTea(){
   closeModal('modal-tea');saveLocal();renderAll();schedulePush();
 }
 
-function deleteTea(){if(!editingId||!confirm('Supprimer ce thé ?'))return;TEAS=TEAS.filter(t=>t.id!==editingId);closeModal('modal-tea');saveLocal();renderAll();schedulePush();}
+function deleteTea(){if(!editingId||!confirm('Supprimer ce thé ?'))return;addTombs([editingId]);TEAS=TEAS.filter(t=>t.id!==editingId);closeModal('modal-tea');saveLocal();renderAll();schedulePush();}
 
 /* ============ STATS ============ */
 function renderStats(){
@@ -1367,7 +1503,7 @@ function renderStats(){
   const souhaits=TEAS.filter(t=>t.statut==='souhait').length;
   const valeur=all.filter(t=>t.prix&&t.stock).reduce((s,t)=>s+parseFloat(t.prix)*parseFloat(t.stock)/100,0);
   const noted=all.filter(t=>t.note);
-  const avgNote=noted.length?(noted.reduce((s,t)=>s+parseFloat(t.note),0)/noted.length).toFixed(1):'—';
+  const avgNote=noted.length?fmtNote(Math.round(noted.reduce((s,t)=>s+parseFloat(t.note),0)/noted.length*10)/10):'—';
   const nbDeg=all.reduce((s,t)=>s+((t.degustations||[]).length),0);
   const stockBas=all.filter(t=>t.stock&&parseFloat(t.stock)>0&&parseFloat(t.stock)<=STOCK_SEUIL).length;
   document.getElementById('stats-cards').innerHTML=`
@@ -1381,13 +1517,13 @@ function renderStats(){
     <div class="stat-card"><div class="stat-value">${valeur.toFixed(0)}€</div><div class="stat-label">Valeur stock</div></div>
     <div class="stat-card${stockBas?' red':''}"><div class="stat-value">${stockBas}</div><div class="stat-label">Stock bas ⚠</div></div>`;
   const top=noted.slice().sort((a,b)=>parseFloat(b.note)-parseFloat(a.note)).slice(0,5);
-  document.getElementById('top5').innerHTML=top.length?`<div style="display:flex;gap:10px;flex-wrap:wrap;">${top.map((t,i)=>`<div class="top5-card" style="${i===0?'border-color:var(--accent);border-width:2px;':''}"><div style="font-size:1.5rem;margin-bottom:3px;">${['🥇','🥈','🥉','4️⃣','5️⃣'][i]}</div><div style="font-weight:600;font-size:12px;margin-bottom:4px;">${esc(t.nom)}</div><div>${starsDisplay(t.note)}</div><div class="note-num">${parseFloat(t.note).toFixed(1)}/20</div></div>`).join('')}</div>`:'<p style="color:var(--ink-light);font-size:12px">Aucun thé noté.</p>';
+  document.getElementById('top5').innerHTML=top.length?`<div style="display:flex;gap:10px;flex-wrap:wrap;">${top.map((t,i)=>`<div class="top5-card" style="${i===0?'border-color:var(--accent);border-width:2px;':''}"><div style="font-size:1.5rem;margin-bottom:3px;">${['🥇','🥈','🥉','4️⃣','5️⃣'][i]}</div><div style="font-weight:600;font-size:12px;margin-bottom:4px;">${esc(t.nom)}</div><div>${scoreDisplay(t.note,{lg:1})}</div></div>`).join('')}</div>`:'<p style="color:var(--ink-light);font-size:12px">Aucun thé noté.</p>';
   const byT={};all.forEach(t=>byT[t.type]=(byT[t.type]||0)+1);const mT=Math.max(...Object.values(byT),1);
   document.getElementById('chart-type').innerHTML=Object.entries(byT).sort((a,b)=>b[1]-a[1]).map(([type,cnt])=>`<div class="bar-row"><div class="bar-label">${TYPE_ICONS[type]||''} ${esc(type)}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mT*100}%;background:${TYPE_COLORS[type]||'#888'}"></div></div><div class="bar-count">${cnt}</div></div>`).join('');
   const byO={};all.forEach(t=>{if(t.origine)byO[t.origine]=(byO[t.origine]||0)+1;});const mO=Math.max(...Object.values(byO),1);
   document.getElementById('chart-origine').innerHTML=Object.entries(byO).sort((a,b)=>b[1]-a[1]).map(([o,cnt])=>`<div class="bar-row"><div class="bar-label" title="${esc(o)}">${esc(o)}</div><div class="bar-track"><div class="bar-fill" style="width:${cnt/mO*100}%;background:var(--tea-green)"></div></div><div class="bar-count">${cnt}</div></div>`).join('')||'<p style="color:var(--ink-light);font-size:12px">Aucune origine.</p>';
   const byF={};all.forEach(t=>{if(!t.fournisseur)return;if(!byF[t.fournisseur])byF[t.fournisseur]={count:0,valeurStock:0,notes:[],url:t.url||''};byF[t.fournisseur].count++;if(t.prix&&t.stock)byF[t.fournisseur].valeurStock+=parseFloat(t.prix)*parseFloat(t.stock)/100;if(t.note)byF[t.fournisseur].notes.push(parseFloat(t.note));});
-  document.querySelector('#table-fournisseurs tbody').innerHTML=Object.entries(byF).sort((a,b)=>b[1].count-a[1].count).map(([f,d])=>{const avg=d.notes.length?(d.notes.reduce((s,v)=>s+v,0)/d.notes.length).toFixed(1)+'/20':'—';const u=safeUrl(d.url);const link=u?`<a href="${u}" target="_blank" rel="noopener">🔗</a>`:'—';return`<tr><td>${esc(f)}</td><td>${link}</td><td>${d.count}</td><td>${avg}</td><td>${d.valeurStock>0?d.valeurStock.toFixed(2)+' €':'—'}</td></tr>`;}).join('')||'<tr><td colspan="5" style="color:var(--ink-light);font-style:italic">Aucun fournisseur.</td></tr>';
+  document.querySelector('#table-fournisseurs tbody').innerHTML=Object.entries(byF).sort((a,b)=>b[1].count-a[1].count).map(([f,d])=>{const avg=d.notes.length?scoreDisplay(d.notes.reduce((s,v)=>s+v,0)/d.notes.length):'—';const u=safeUrl(d.url);const link=u?`<a href="${u}" target="_blank" rel="noopener">🔗</a>`:'—';return`<tr><td>${esc(f)}</td><td>${link}</td><td>${d.count}</td><td>${avg}</td><td>${d.valeurStock>0?d.valeurStock.toFixed(2)+' €':'—'}</td></tr>`;}).join('')||'<tr><td colspan="5" style="color:var(--ink-light);font-style:italic">Aucun fournisseur.</td></tr>';
 }
 
 /* ============================================================
@@ -1637,6 +1773,8 @@ function importData(){
   }catch(e){showToast('Import invalide : '+(e.message||'format non reconnu'),true);return;}
   if(!newT.length){showToast('Aucun thé trouvé dans l\'import.',true);return;}
   if(!confirm(`Remplacer la collection actuelle (${TEAS.length} thés) par ${newT.length} thés importés ?`))return;
+  const keep=new Set(newT.map(t=>t.id));
+  addTombs(TEAS.map(t=>t.id).filter(id=>!keep.has(id)));
   TEAS=newT;saveLocal();renderAll();closeModal('modal-import');schedulePush();showToast(`${newT.length} thés importés ✓`);
 }
 
@@ -1656,7 +1794,7 @@ function showToast(msg,isError){const t=document.getElementById('toast');t.textC
 /* ============ INIT ============ */
 async function init(){
   applyTheme(document.documentElement.dataset.theme||'light');
-  buildStars();buildDmStars();updateTokenStatus();
+  syncStars();setDmNote(0);updateTokenStatus();
   await loadData();
   renderAll();
 }
