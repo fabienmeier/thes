@@ -54,5 +54,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msodtswh9aiz9n5xdf",
+  "nom": "Grand Yunnan",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Yunnan, Chine",
+  "statut": "en-stock",
+  "fournisseur": "Kancha",
+  "url": "",
+  "prix": "8.5",
+  "stock": "",
+  "dateAchat": "",
+  "note": "15",
+  "commentaire": "",
+  "bio": true,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
