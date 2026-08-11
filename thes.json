@@ -82,5 +82,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msoeloytghlihl2nwk9",
+  "nom": "Earl Grey Bio",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Népal",
+  "statut": "en-stock",
+  "fournisseur": "Kancha",
+  "url": "",
+  "prix": "12.9",
+  "stock": "",
+  "dateAchat": "",
+  "note": "17",
+  "commentaire": "",
+  "bio": true,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
