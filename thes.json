@@ -222,5 +222,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msr6o8iff339qdu9ack",
+  "nom": "Yellow Label",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Kenya",
+  "statut": "en-stock",
+  "fournisseur": "Lipton",
+  "url": "",
+  "prix": "1.9",
+  "stock": "",
+  "dateAchat": "",
+  "note": "10",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
