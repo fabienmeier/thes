@@ -286,7 +286,8 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 
 /* --- L'étiquette elle-même : toujours noir sur blanc --- */
 .lab{width:105mm;height:74.25mm;background:#fff;color:#111;padding:8mm 9mm 7mm;display:flex;flex-direction:column;
-     position:relative;overflow:hidden;font-family:'Bodoni Moda',Georgia,'Times New Roman',serif;box-sizing:border-box;}
+     position:relative;overflow:hidden;font-family:'Bodoni Moda',Georgia,'Times New Roman',serif;box-sizing:border-box;
+     -webkit-print-color-adjust:exact;print-color-adjust:exact;}
 .lab.shadow{box-shadow:0 2px 14px rgba(0,0,0,.16);}
 .lab-top{display:flex;gap:6mm;align-items:flex-start;}
 .lab-seal{width:19mm;height:19mm;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;
@@ -303,7 +304,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
 .lab-brew{text-align:right;font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-weight:400;font-size:2.7mm;letter-spacing:.19em;
           text-transform:uppercase;color:#4a4a4a;margin-bottom:2mm;min-height:3mm;}
 .lab-brew i{font-style:normal;color:#a0a0a0;}
-.lab-rule{height:.25mm;background:#111;}
+.lab-rule{height:0;background:none;border-top:.3mm solid #111;}
 .lab-meta{margin-top:3.2mm;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;}
 .lab-meta dt{font-family:'Jost','Zen Kaku Gothic New',sans-serif;font-size:2.1mm;letter-spacing:.22em;text-transform:uppercase;color:#8a8a8a;margin-bottom:1.1mm;}
 .lab-meta dd{font-size:3.5mm;line-height:1.15;color:#111;overflow-wrap:anywhere;}
@@ -318,6 +319,7 @@ table.tea-table td{padding:8px 11px;vertical-align:middle;}
   html,body{background:#fff!important;margin:0;padding:0;}
   body>*{display:none!important;}
   #label-sheets{display:block!important;}
+  #label-sheets,#label-sheets *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   .sheet{page-break-after:always;break-after:page;}
   .sheet:last-child{page-break-after:auto;break-after:auto;}
   .lab{box-shadow:none!important;}
