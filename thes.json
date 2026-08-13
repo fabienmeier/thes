@@ -54,5 +54,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msr622fkq3hhbzw6q7",
+  "nom": "China Ynnan",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Yunnan, Chine",
+  "statut": "en-stock",
+  "fournisseur": "Tee Peter",
+  "url": "",
+  "prix": "3.6",
+  "stock": "",
+  "dateAchat": "",
+  "note": "13",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "90",
+   "duree": "180",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
