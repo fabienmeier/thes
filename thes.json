@@ -110,5 +110,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msr6743elra3k6wp78",
+  "nom": "Chaï",
+  "type": "autre",
+  "subcategory": "",
+  "origine": "Népal",
+  "statut": "en-stock",
+  "fournisseur": "",
+  "url": "",
+  "prix": "12.90",
+  "stock": "",
+  "dateAchat": "",
+  "note": "13.5",
+  "commentaire": "",
+  "bio": true,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
