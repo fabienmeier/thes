@@ -82,5 +82,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msr64i0vixwco0nt2ap",
+  "nom": "Kenia TGFOP1 \"Tinderet\"",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Kenya",
+  "statut": "en-stock",
+  "fournisseur": "Tee Peter",
+  "url": "",
+  "prix": "4.2",
+  "stock": "",
+  "dateAchat": "",
+  "note": "13",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
