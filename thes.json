@@ -237,7 +237,7 @@
   "dateAchat": "",
   "note": "10",
   "commentaire": "",
-  "bio": false,
+  "bio": true,
   "sauvage": false,
   "tags": [],
   "infusion": {
