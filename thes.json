@@ -166,5 +166,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msr6ag5pxr6ovqhc48h",
+  "nom": "Bourgeons dorés de Fengqing",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Yunnan, Chine",
+  "statut": "en-stock",
+  "fournisseur": "Kancha",
+  "url": "",
+  "prix": "21",
+  "stock": "",
+  "dateAchat": "",
+  "note": "15",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
