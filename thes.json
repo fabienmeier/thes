@@ -250,5 +250,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "msx1j1rcv4e46hgx3k",
+  "nom": "Pure Ceylan",
+  "type": "noir",
+  "subcategory": "",
+  "origine": "Kandy, Sri Lanka",
+  "statut": "en-stock",
+  "fournisseur": "LABOOKELIE",
+  "url": "",
+  "prix": "",
+  "stock": "",
+  "dateAchat": "",
+  "note": "11",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
