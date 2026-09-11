@@ -278,5 +278,33 @@
   },
   "degustations": [],
   "historique": []
+ },
+ {
+  "id": "mtxauqwgyl204wi0sy",
+  "nom": "Douchka",
+  "type": "noir",
+  "subcategory": "Russe",
+  "origine": "Kenya",
+  "statut": "en-stock",
+  "fournisseur": "Dammann",
+  "url": "",
+  "prix": "8.5",
+  "stock": "100",
+  "dateAchat": "",
+  "note": "16",
+  "commentaire": "",
+  "bio": false,
+  "sauvage": false,
+  "tags": [],
+  "infusion": {
+   "temp": "",
+   "duree": "",
+   "qte": "",
+   "infusionsMax": "",
+   "dlc": "",
+   "notes": ""
+  },
+  "degustations": [],
+  "historique": []
  }
 ]
